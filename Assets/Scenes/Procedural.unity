@@ -340,8 +340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   proceduralElements:
   - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
-  - {fileID: 4223131677537799814, guid: 01fa1accb49f07c46bf334edf72e952b, type: 3}
   - {fileID: 2735774542575844395, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
+  - {fileID: 4223131677537799814, guid: 01fa1accb49f07c46bf334edf72e952b, type: 3}
 --- !u!4 &845936584
 Transform:
   m_ObjectHideFlags: 0
