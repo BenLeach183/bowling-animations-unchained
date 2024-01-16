@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2709684923815668763}
   - component: {fileID: 1204049870980646150}
   - component: {fileID: 8163659164203247411}
-  - component: {fileID: 7383811962963433371}
   - component: {fileID: 53518814079836957}
   m_Layer: 0
   m_Name: Player
@@ -35,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4252040950634955685
 MeshFilter:
@@ -135,18 +134,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!75 &7383811962963433371
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1185659512205548504}
-  m_Enabled: 1
-  m_Force: {x: 0, y: -9.8, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!114 &53518814079836957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,3 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e33bb0cf42cf8134ab162f09a36a8e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentMoveDirection: {x: 0, y: 0, z: 1}
+  CurrentUpDirection: {x: 0, y: 1, z: 0}
+  RightMoveDirection: {x: 1, y: 0, z: 0}
+  InputDirection: {x: 0, y: 0, z: 0}
+  TargetMoveDirection: {x: 0, y: 0, z: 1}
+  TargetUpDirection: {x: 0, y: 1, z: 0}
+  speed: 1

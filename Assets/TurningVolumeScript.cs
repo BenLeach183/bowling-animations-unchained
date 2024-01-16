@@ -7,7 +7,7 @@ public class TurningVolumeScript : MonoBehaviour
 {
     public List<Transform> PlayerMarkers, CameraMarkers;
     GameObject Player;
-    Vector3 TargetDirection = Vector3.forward;
+    Vector3 TargetDirection = Vector3.forward,TargetUpDirection = Vector3.up;
     int LastClosest = 0, NextClosest = 0;
     private void OnTriggerEnter(Collider other)
     {
@@ -19,57 +19,68 @@ public class TurningVolumeScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        int templ = 0;
-        for(int i = 0;i < PlayerMarkers.Count; i++)
-        {
-            if (Vector3.Distance(Player.transform.position,PlayerMarkers[i].position) < Vector3.Distance(Player.transform.position, PlayerMarkers[templ].position))
-            {
-                templ = i;
-            }
-        }
-        int tempn = -1;
-        for(int i = 0; i < PlayerMarkers.Count; i++)
-        {
-            if(i != templ)
-            {
-                if(tempn == -1)
-                {
-                    tempn = i;
-                }
-                if (Vector3.Distance(Player.transform.position, PlayerMarkers[i].position) < Vector3.Distance(Player.transform.position, PlayerMarkers[tempn].position))
-                {
-                    tempn = i;
-                }
-            }
+        if(PlayerMarkers.Count > 1){
 
-        }
-        LastClosest = templ;
-        NextClosest = tempn;
-
-        //Debug.Log("" + LastClosest + " : " + NextClosest);
         
-        if (NextClosest < LastClosest)
-        {
-            int x = NextClosest;
-            NextClosest = LastClosest;
-            LastClosest = x;
+            int templ = 0;
+            for(int i = 0;i < PlayerMarkers.Count; i++)
+            {
+                if (Vector3.Distance(Player.transform.position,PlayerMarkers[i].position) < Vector3.Distance(Player.transform.position, PlayerMarkers[templ].position))
+                {
+                    templ = i;
+                }
+            }
+            int tempn = -1;
+            for(int i = 0; i < PlayerMarkers.Count; i++)
+            {
+                if(i != templ)
+                {
+                    if(tempn == -1)
+                    {
+                        tempn = i;
+                    }
+                    if (Vector3.Distance(Player.transform.position, PlayerMarkers[i].position) < Vector3.Distance(Player.transform.position, PlayerMarkers[tempn].position))
+                    {
+                        tempn = i;
+                    }
+                }
+
+            }
+            LastClosest = templ;
+            NextClosest = tempn;
+
+            //Debug.Log("" + LastClosest + " : " + NextClosest);
             
-        }
-        Debug.Log("" + LastClosest + " :: " + NextClosest);
-        
+            if (NextClosest < LastClosest)
+            {
+                int x = NextClosest;
+                NextClosest = LastClosest;
+                LastClosest = x;
+                
+            }
+            //Debug.Log("" + LastClosest + " :: " + NextClosest);
+            
+            
+            float TotalDistance = Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) + Vector3.Distance(Player.transform.position, PlayerMarkers[NextClosest].position);
 
-        float TotalDistance = Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) + Vector3.Distance(Player.transform.position, PlayerMarkers[NextClosest].position);
+            if(Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) > Vector3.Distance(PlayerMarkers[LastClosest].position, PlayerMarkers[NextClosest].position))
+            {
+                TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, 1);
+                TargetUpDirection = Vector3.Slerp(PlayerMarkers[LastClosest].up, PlayerMarkers[NextClosest].up, 1);
 
-        if(Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) > Vector3.Distance(PlayerMarkers[LastClosest].position, PlayerMarkers[NextClosest].position))
-        {
-            TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, 1);
-
+            }
+            else
+            {
+                TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
+                TargetUpDirection = Vector3.Slerp(PlayerMarkers[LastClosest].up, PlayerMarkers[NextClosest].up, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
+            }
+            Player.GetComponent<PlayerController>().TargetMoveDirection = TargetDirection;
+            Player.GetComponent<PlayerController>().TargetUpDirection = TargetUpDirection;
         }
-        else
-        {
-            TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
+        else{
+            Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[0].forward;
+            Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[0].up;
         }
-        Player.GetComponent<PlayerController>().TargetMoveDirection = TargetDirection;
     }
 
 
