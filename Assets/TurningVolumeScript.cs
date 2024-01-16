@@ -60,9 +60,16 @@ public class TurningVolumeScript : MonoBehaviour
 
         float TotalDistance = Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) + Vector3.Distance(Player.transform.position, PlayerMarkers[NextClosest].position);
 
+        if(Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) > Vector3.Distance(PlayerMarkers[LastClosest].position, PlayerMarkers[NextClosest].position))
+        {
+            TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, 1);
 
-        TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
-        Player.transform.rotation = Quaternion.LookRotation(TargetDirection);
+        }
+        else
+        {
+            TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
+        }
+        Player.GetComponent<PlayerController>().TargetMoveDirection = TargetDirection;
     }
 
 
