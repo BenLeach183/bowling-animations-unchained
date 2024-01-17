@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
 
+    bool firstInput = true;
+
     Vector2 InputVector = Vector2.zero;
+
+    Vector2 JoystickPivot;
 
     ConstantForce Force;
     Rigidbody Rigidbody;
@@ -37,10 +41,26 @@ public class PlayerController : MonoBehaviour
         Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 1000 * Time.deltaTime);
 
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed );
+
         InputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        JoystickInput();
 
         CurrentMoveDirection = Vector3.Lerp(CurrentMoveDirection, TargetMoveDirection, Time.deltaTime * speed);
         CurrentUpDirection = Vector3.Lerp(CurrentUpDirection, TargetUpDirection, Time.deltaTime * speed);
 
+    }
+
+    private void JoystickInput(){
+        if(Input.touchCount > 0){
+            if(firstInput){
+                JoystickPivot = Input.mousePosition;
+                firstInput = false;
+            }
+
+            InputVector = ((Vector2)Input.mousePosition - JoystickPivot).normalized;
+        }
+        else{
+            firstInput = true;
+        }
     }
 }
