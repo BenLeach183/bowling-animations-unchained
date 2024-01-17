@@ -9,11 +9,13 @@ public class TurningVolumeScript : MonoBehaviour
     GameObject Player;
     Vector3 TargetDirection = Vector3.forward,TargetUpDirection = Vector3.up;
     int LastClosest = 0, NextClosest = 0;
+    float BaseSpeed = 1;
     private void OnTriggerEnter(Collider other)
     {
         if(other.transform.tag == "Player")
         {
             Player = other.gameObject;
+            BaseSpeed = Player.GetComponent<PlayerController>().speed;
         }
     }
 
@@ -74,13 +76,37 @@ public class TurningVolumeScript : MonoBehaviour
                 TargetDirection = Vector3.Slerp(PlayerMarkers[LastClosest].forward, PlayerMarkers[NextClosest].forward, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
                 TargetUpDirection = Vector3.Slerp(PlayerMarkers[LastClosest].up, PlayerMarkers[NextClosest].up, Vector3.Distance(Player.transform.position, PlayerMarkers[LastClosest].position) / TotalDistance);
             }
+            /*
+            Vector3 Cross1 = Vector3.Cross(TargetDirection.normalized, TargetUpDirection.normalized).normalized;
+            Vector3 Cross2 = Cross1 * -1;
+            Vector3 d = Player.GetComponent<Rigidbody>().velocity.normalized;
+
+            if (Vector3.Dot(d, Cross1) < 0)
+            {
+
+                TargetDirection = d - (2 * Vector3.Dot(d, Cross1) * Cross1);
+            }
+            else
+            {
+                TargetDirection = d - (2 * Vector3.Dot(d, Cross2) * Cross2);
+            }
+            */
+            Player.GetComponent<PlayerController>().speed = Mathf.Lerp(BaseSpeed/5,BaseSpeed,(Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
+
             Player.GetComponent<PlayerController>().TargetMoveDirection = TargetDirection;
             Player.GetComponent<PlayerController>().TargetUpDirection = TargetUpDirection;
         }
         else{
+            Player.GetComponent<PlayerController>().speed = Mathf.Lerp(BaseSpeed / 5, BaseSpeed, (Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
+
             Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[0].forward;
             Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[0].up;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Player.GetComponent<PlayerController>().speed = BaseSpeed;
     }
 
 

@@ -8,6 +8,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         transform.position = Player.transform.position;
-        transform.rotation = Quaternion.LookRotation(Player.GetComponent<PlayerController>().CurrentMoveDirection, Player.GetComponent<PlayerController>().CurrentUpDirection);
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(Player.GetComponent<Rigidbody>().velocity.normalized, Player.GetComponent<PlayerController>().CurrentUpDirection),Time.deltaTime * Player.GetComponent<PlayerController>().speed);
     }
 }
