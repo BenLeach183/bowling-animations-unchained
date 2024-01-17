@@ -954,7 +954,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -974,11 +980,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 336f59f1-5bf8-4c60-b4d1-510f339031eb
+  cloudProjectId: 99e78605-f45a-4af8-8a91-e80b2c5d6b5d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: bowling-animations-unchained
-  organizationId: bleach183
+  organizationId: ethantl28_unity
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
