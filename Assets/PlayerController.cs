@@ -7,8 +7,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentMoveDirection = Vector3.forward, CurrentUpDirection = Vector3.up , RightMoveDirection = Vector3.right, InputDirection = Vector3.zero;
     public Vector3 TargetMoveDirection = Vector3.forward, TargetUpDirection = Vector3.up;
 
-    public GameObject indicator, indicator2;
-
     public float speed;
 
     bool firstInput = true;
@@ -28,9 +26,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()   
     {
-        indicator.transform.position = transform.position + TargetMoveDirection;
-        indicator2.transform.position = transform.position + TargetUpDirection;
-
         RightMoveDirection = Vector3.Cross(CurrentUpDirection, CurrentMoveDirection);
 
         InputDirection = ((InputVector.x * RightMoveDirection) + (InputVector.y * CurrentMoveDirection)).normalized;
@@ -38,7 +33,7 @@ public class PlayerController : MonoBehaviour
         Vector3 RelativeUpVel = Vector3.Scale(Rigidbody.velocity,CurrentUpDirection);
         RelativeUpVel = (CurrentUpDirection * -9.8f * speed * 30 * Time.deltaTime);// RelativeUpVel + (CurrentUpDirection * -9.8f);
 
-        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 1000 * Time.deltaTime);
+        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 2000 * Time.deltaTime);
 
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed );
 
