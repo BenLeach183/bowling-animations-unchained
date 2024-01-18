@@ -106,7 +106,7 @@ public class TurningVolumeScript : MonoBehaviour
             Player.GetComponent<PlayerController>().TargetUpDirection = TargetUpDirection;
         }
         else{
-            Player.GetComponent<PlayerController>().speed = Mathf.Lerp(0.1f, BaseSpeed, (Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
+            Player.GetComponent<PlayerController>().speed = Mathf.Lerp(BaseSpeed / 5, BaseSpeed, (Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
 
             Vector3 PlayerVel = Player.GetComponent<Rigidbody>().velocity.normalized;
             float PlayerSpeed = Player.GetComponent<Rigidbody>().velocity.magnitude;
