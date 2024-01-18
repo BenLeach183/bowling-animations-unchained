@@ -93,12 +93,28 @@ public class TurningVolumeScript : MonoBehaviour
             */
             Player.GetComponent<PlayerController>().speed = Mathf.Lerp(BaseSpeed/5,BaseSpeed,(Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
 
+            Vector3 PlayerVel = Player.GetComponent<Rigidbody>().velocity.normalized;
+            float PlayerSpeed = Player.GetComponent<Rigidbody>().velocity.magnitude;
+
+            if ((TargetDirection + (PlayerVel * -1)).magnitude > 1.25f)
+            {
+                Player.GetComponent<Rigidbody>().AddForce((TargetDirection + (PlayerVel * -1)) * PlayerSpeed * 2);
+            }
+            
+
             Player.GetComponent<PlayerController>().TargetMoveDirection = TargetDirection;
             Player.GetComponent<PlayerController>().TargetUpDirection = TargetUpDirection;
         }
         else{
             Player.GetComponent<PlayerController>().speed = Mathf.Lerp(0.1f, BaseSpeed, (Vector3.Dot(Player.GetComponent<Rigidbody>().velocity.normalized, TargetDirection) + 1) / 2);
 
+            Vector3 PlayerVel = Player.GetComponent<Rigidbody>().velocity.normalized;
+            float PlayerSpeed = Player.GetComponent<Rigidbody>().velocity.magnitude;
+
+            if ((TargetDirection + (PlayerVel * -1)).magnitude > 1.25f)
+            {
+                Player.GetComponent<Rigidbody>().AddForce((TargetDirection + (PlayerVel * -1)) * PlayerSpeed * 2);
+            }
             Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[0].forward;
             Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[0].up;
         }
@@ -107,6 +123,8 @@ public class TurningVolumeScript : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Player.GetComponent<PlayerController>().speed = BaseSpeed;
+        Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[PlayerMarkers.Count - 1].forward;
+        Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[PlayerMarkers.Count - 1].up;
     }
 
 
