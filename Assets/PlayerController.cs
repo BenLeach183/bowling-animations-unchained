@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentMoveDirection = Vector3.forward, CurrentUpDirection = Vector3.up , RightMoveDirection = Vector3.right, InputDirection = Vector3.zero;
     public Vector3 TargetMoveDirection = Vector3.forward, TargetUpDirection = Vector3.up;
 
+
     public float speed;
 
     bool firstInput = true;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()   
     {
+        
         RightMoveDirection = Vector3.Cross(CurrentUpDirection, CurrentMoveDirection);
 
         InputDirection = ((InputVector.x * RightMoveDirection) + (InputVector.y * CurrentMoveDirection)).normalized;
