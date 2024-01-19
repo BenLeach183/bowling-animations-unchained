@@ -58,6 +58,10 @@ public class ProceduralGeneration : MonoBehaviour
         pooledTrackScripts[2].EnableTrack();
         availableTracks.Remove(2);
         currentTracks.Add(2);
+
+        AddTrack();
+        AddTrack();
+        AddTrack();
     }
 
     // Update is called once per frame
