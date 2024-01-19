@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ProceduralGeneration : MonoBehaviour
 {
+
+    public int MaxTrackLength = 2;
     // list of all types of track
     public GameObject[] proceduralElements;
 
@@ -96,9 +98,9 @@ public class ProceduralGeneration : MonoBehaviour
 
         // if the index is greater than 1, meaning theres at least 3 tracks before it
         // remove the tracks until theres only 2
-        if(collisionTrackIndex > 1)
+        if(collisionTrackIndex > MaxTrackLength - 1)
         {
-            collisionTrackIndex -= 2;
+            collisionTrackIndex -= MaxTrackLength;
 
             // loop through tracks to remove
             for(int i = 0; i < collisionTrackIndex; i++)
