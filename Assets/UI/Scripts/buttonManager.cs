@@ -3,23 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Security;
+using UnityEditor.Rendering;
 
 public class buttonManager : MonoBehaviour
 {
-    private bool fadeOut = false;
-
     private GameObject button;
+    private GameObject mainCamera;
+
+    private bool zoomToScreen = false;
+    private bool playButtonPressed = false;
+    private bool settingsButtonPressed = false;
+
+    private float startTime;
+    private float zoomDistance;
+    public float zoomSpeed;
+
+    private Transform cameraStartingTrans;
 
     public void StartGame(GameObject m_button)
     {
-        //Start the game
         button = m_button;
-        fadeOut = true;
+
+        Button playButton = button.GetComponent<Button>();
+        playButton.interactable = false;
+
+        playButtonPressed = true;
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraStartingTrans = mainCamera.transform;
+        zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
+        startTime = Time.time;
+
+        zoomToScreen = true;
     }
 
-    public void OpenSettings()
+    public void OpenSettings(GameObject m_button)
     {
-        //open settings menu
+        button = m_button;
+
+        Button settingsButton = button.GetComponent<Button>();
+        settingsButton.interactable = false;
+
+        settingsButtonPressed = true;
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraStartingTrans = mainCamera.transform;
+        zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
+        startTime = Time.time;
+
+        zoomToScreen = true;
     }
 
     public void QuitGame()
@@ -29,16 +62,28 @@ public class buttonManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (fadeOut)
+        if (zoomToScreen)
         {
-            Image buttonImage = button.GetComponent<Image>();
-            Color newButtonColor = buttonImage.color;
-            float newButtonAlpha = newButtonColor.a -= Time.deltaTime;
-            newButtonColor.a = newButtonAlpha;
-            buttonImage.color = newButtonColor;
-            if (buttonImage.color.a == 0f)
+            if (mainCamera.transform.position == button.transform.position)
             {
-                fadeOut = false;
+                zoomToScreen = false;
+                if (playButtonPressed)
+                {
+                    SceneManager.LoadScene("Procedural");
+                    playButtonPressed = false;
+                }
+                else if (settingsButtonPressed)
+                {
+                    //open settings menu
+                    settingsButtonPressed = false;
+                }
+            }
+            else
+            {
+                float distanceCovered = (Time.time - startTime) * zoomSpeed;
+                float fractionOfDistance = distanceCovered / zoomDistance;
+
+                mainCamera.transform.position = Vector3.Lerp(cameraStartingTrans.position, button.transform.position, fractionOfDistance);
             }
         }
     }

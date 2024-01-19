@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Audio;
 
 public class randomBowl : MonoBehaviour
 {
     public GameObject ball;
     public GameObject respawnBall;
     public GameObject ballSpotLight;
+    public GameObject rollingSoundObject;
+    public GameObject strikeSoundObject;
 
     public Vector3[] laneStartLocations;
 
@@ -23,13 +26,28 @@ public class randomBowl : MonoBehaviour
 
     private bool ballRespawnTimer = false;
 
+    AudioSource ballRolling;
+    AudioSource strike;
+
     private void Start()
     {
         rb = ball.GetComponent<Rigidbody>();
+
         ballCollider = ball.GetComponent<SphereCollider>();
+
         ballRespawnCollider = respawnBall.GetComponent<BoxCollider>();
+
         ball.transform.position = laneStartLocations[Random.Range(0, 5)];
         ballSpotLight.transform.position = new Vector3(ball.transform.position.x, 2.6f, ball.transform.position.z);
+
+        ballRolling = rollingSoundObject.GetComponent<AudioSource>();
+        strike = strikeSoundObject.GetComponent<AudioSource>();
+
+        ballRolling.Stop();
+        strike.Stop();
+
+        ballRolling.playOnAwake = false;
+        strike.playOnAwake = false;
     }
 
     // Update is called once per frame
@@ -56,11 +74,14 @@ public class randomBowl : MonoBehaviour
             if (rb.velocity.z <= 0)
             {
                 rb.AddForce(0, 0, bowlSpeed);
+                ballRolling.Play();
             }
             if (ballCollider.bounds.Intersects(ballRespawnCollider.bounds))
             {
                 ballSpotLight.SetActive(false);
                 ballRespawnTimer = true;
+                strike.Play();
+                ballRolling.Stop();
             }
             ballSpotLight.transform.position = new Vector3(ball.transform.position.x, 2.6f, ball.transform.position.z);
         }
