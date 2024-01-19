@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /*
   Each track object has this script
@@ -17,6 +18,9 @@ public class FloorTrackObject : MonoBehaviour
     // whether the track is enabled
     public bool trackEnabled = false;
 
+    // store the ID of the track
+    public int trackID = 0;
+
     // store the local end and start pos/rot of track
     private Vector3 localStartPos;
     private Vector3 localEndPos;
@@ -31,7 +35,6 @@ public class FloorTrackObject : MonoBehaviour
     // update the default values
     public void Awake()
     {
-        Debug.Log("Awake");
         this.gameObject.SetActive(false);
 
         localStartPos = transform.Find("procedural_start").position;

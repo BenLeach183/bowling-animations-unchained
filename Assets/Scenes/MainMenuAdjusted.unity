@@ -12792,11 +12792,11 @@ MonoBehaviour:
   respawnBall: {fileID: 810130902}
   ballSpotLight: {fileID: 1660073493}
   laneStartLocations:
-  - {x: 0, y: 0.15, z: -2}
-  - {x: 1.25, y: 0.15, z: -2}
-  - {x: 2.5, y: 0.15, z: -2}
-  - {x: -1.25, y: 0.15, z: -2}
-  - {x: -2.5, y: 0.15, z: -2}
+  - {x: 0, y: 0.09, z: -2}
+  - {x: 1.25, y: 0.09, z: -2}
+  - {x: 2.5, y: 0.09, z: -2}
+  - {x: -1.25, y: 0.09, z: -2}
+  - {x: -2.5, y: 0.09, z: -2}
   bowlSpeed: 500
 --- !u!4 &1414546814
 Transform:
@@ -13506,7 +13506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4cb8c30ee87413148b2373b776669473, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.161
+      value: 0.1008
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4cb8c30ee87413148b2373b776669473, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14969,7 +14969,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 50
+  m_Intensity: 11.8
   m_Range: 50
   m_SpotAngle: 25
   m_InnerSpotAngle: 0

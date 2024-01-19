@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 959847492875700178}
   m_LocalRotation: {x: -0, y: 0.27129096, z: -0, w: 0.9624974}
   m_LocalPosition: {x: 1.5104654, y: 3.5243793, z: 1.9147744}
-  m_LocalScale: {x: 2, y: 0.05, z: 1}
+  m_LocalScale: {x: 2, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 647379945053236456}
@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 1980162842343745757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.0994654, y: 3.5243793, z: 1.4677744}
-  m_LocalScale: {x: 2, y: 0.05, z: 1}
+  m_LocalScale: {x: 2, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 647379945053236456}
@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 2950052226745567326}
   m_LocalRotation: {x: -0, y: 0.33538914, z: -0, w: 0.9420797}
   m_LocalPosition: {x: 4.5734653, y: 3.5243793, z: 0.94177437}
-  m_LocalScale: {x: 2, y: 0.05, z: 1}
+  m_LocalScale: {x: 2, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 647379945053236456}
@@ -356,9 +356,10 @@ GameObject:
   m_Component:
   - component: {fileID: 647379945053236456}
   - component: {fileID: -1635530431407877156}
+  - component: {fileID: 4573053964073991559}
   m_Layer: 0
   m_Name: placeholder_track_2
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 4223131677537799814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.0994654, y: -3.5243793, z: -1.4677744}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 1, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9040876476544999512}
@@ -397,8 +398,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connected: 0
   trackEnabled: 0
+  trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
+--- !u!65 &4573053964073991559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223131677537799814}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1, y: 1, z: 2.59}
+  m_Center: {x: 4.14, y: 3.45, z: 0.97}
 --- !u!1 &4443121662569176847
 GameObject:
   m_ObjectHideFlags: 0
