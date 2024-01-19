@@ -186,7 +186,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8286586713671617214, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1087403584}
+    - targetCorrespondingSourceObject: {fileID: 8286586713671617214, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1087403583}
   m_SourcePrefab: {fileID: 100100000, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
 --- !u!1 &824147856
 GameObject:
@@ -337,8 +343,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   proceduralElements:
   - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
-  - {fileID: 2735774542575844395, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
+  - {fileID: 8410289366016849012, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
   - {fileID: 4223131677537799814, guid: 01fa1accb49f07c46bf334edf72e952b, type: 3}
+  - {fileID: 3355977644945302993, guid: 25e8f9a7380743745acb88c2c03dbd2d, type: 3}
+  - {fileID: 3372956647528424646, guid: 62d4eaaba32bcba4ebc5c06893b8f8e8, type: 3}
 --- !u!4 &845936584
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +392,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackGeneration: {fileID: 845936583}
+--- !u!1 &1087403579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8286586713671617214, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+  m_PrefabInstance: {fileID: 416659948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1087403583
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087403579}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 1247ef6dca3f8624787661c82b41851b, type: 2}
+--- !u!114 &1087403584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087403579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1001 &1826717560
 PrefabInstance:
   m_ObjectHideFlags: 0

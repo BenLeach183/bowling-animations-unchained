@@ -13,7 +13,7 @@ public class ProceduralGeneration : MonoBehaviour
     private FloorTrackObject[] pooledTrackScripts;
 
     // number of pooled objects for each type
-    private byte numPooledObject = 2;
+    private byte numPooledObject = 3;
 
     // list of tracks in scene
     private List<int> currentTracks = new List<int>();
@@ -55,9 +55,9 @@ public class ProceduralGeneration : MonoBehaviour
         }
 
         // by default enable the first track in the list
-        pooledTrackScripts[2].EnableTrack();
-        availableTracks.Remove(2);
-        currentTracks.Add(2);
+        pooledTrackScripts[3].EnableTrack();
+        availableTracks.Remove(3);
+        currentTracks.Add(3);
 
         AddTrack();
         AddTrack();
