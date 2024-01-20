@@ -6,6 +6,7 @@ public class BezierPathGenerator : MonoBehaviour
 {
     public GameObject Point1, Point2, Point3, Point4;
 
+    public TurningVolumeScript turningVolumeScript;
     public GameObject pointer;
     public GameObject platform;
     Vector3 a, b, c, d;
@@ -33,9 +34,9 @@ public class BezierPathGenerator : MonoBehaviour
         pointers = new List<GameObject>();
         mesh = new Mesh();
 
-        Vertices = new Vector3[(Segments + 1) * 2];
-        UVs = new Vector2[(Segments + 1) * 2];
-        Triangles = new int[(Segments) * 6];
+        Vertices = new Vector3[(Segments + 1) * 2];//4];
+        UVs = new Vector2[(Segments + 1) * 2];//4];
+        Triangles = new int[(Segments) * 6];//12];
         //platforms = new List<GameObject>();
 
         a = Point1.transform.position;
@@ -53,11 +54,13 @@ public class BezierPathGenerator : MonoBehaviour
         {
             //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
             pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
+            turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
         }
     }
 
     void Update()
     {
+        /*
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
@@ -73,16 +76,27 @@ public class BezierPathGenerator : MonoBehaviour
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
 
-        }
 
+            //turningVolumeScript.PlayerMarkers = pointers.transform;
+
+        }
+        */
     }
 
     void UpadateMesh()
     {
-        for (int i = 0; i <= Segments; i++)
+        for (int i = 0; i <= Segments;i++)// * 2; i++)
         {
-            Vertices[i * 2] = (Positions[i] - transform.position) - (Rotations[i] * -Vector3.right);
-            Vertices[(i * 2) + 1] = (Positions[i] - transform.position) - (Rotations[i] * Vector3.right);
+
+            //if(i <= Segments){
+                Vertices[i * 2] = (Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3);
+                Vertices[(i * 2) + 1] = (Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3);
+            //}
+            //else{
+            //    Vertices[i * 2] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * -Vector3.right))-(Rotations[Segments -(i - Segments)] * Vector3.up);
+            //    Vertices[(i * 2) + 1] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * Vector3.right)) - (Rotations[Segments -(i - Segments)] * Vector3.up);
+            //}
+            
 
             if (i < Segments)
             {
@@ -102,9 +116,12 @@ public class BezierPathGenerator : MonoBehaviour
                 Triangles[(i * 12) + 5+6] = (i * 2) + 2+ 4;
                 */
             }
-
         }
-
+        /*
+        for(int i = 0; i < (Segments) * 6; i++){
+            Triangles[(((Segments) * 12) - 1) - i] = Triangles[i];
+        }
+        */
         mesh.vertices = Vertices;
         mesh.triangles = Triangles;
     }
