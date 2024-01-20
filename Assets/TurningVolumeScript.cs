@@ -15,7 +15,7 @@ public class TurningVolumeScript : MonoBehaviour
         if(other.transform.tag == "Player")
         {
             Player = other.gameObject;
-            BaseSpeed = Player.GetComponent<PlayerController>().speed;
+            BaseSpeed = Player.GetComponent<PlayerController>().MaxSpeed;
         }
     }
 

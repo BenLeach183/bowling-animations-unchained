@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
 
     public float speed;
+    public float MaxSpeed;
 
     bool firstInput = true;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         Force = GetComponent<ConstantForce>();
         Rigidbody = GetComponent<Rigidbody>();
+        speed = MaxSpeed;
     }
 
     private void Update()   
