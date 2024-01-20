@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         Vector3 RelativeUpVel = Vector3.Scale(Rigidbody.velocity,CurrentUpDirection);
         RelativeUpVel = (CurrentUpDirection * -9.8f * speed * 30 * Time.deltaTime);// RelativeUpVel + (CurrentUpDirection * -9.8f);
 
-        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 2000 * Time.deltaTime);
+        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 200 * speed * Time.deltaTime);
 
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed );
 
