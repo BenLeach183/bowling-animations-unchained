@@ -6,7 +6,8 @@ using UnityEngine;
 public class ProceduralGeneration : MonoBehaviour
 {
 
-    public int MaxTrackLength = 2;
+    public int maxBackTrackLength = 1;
+
     // list of all types of track
     public GameObject[] proceduralElements;
 
@@ -57,19 +58,13 @@ public class ProceduralGeneration : MonoBehaviour
         }
 
         // by default enable the first track in the list
-        pooledTrackScripts[3].EnableTrack();
-        availableTracks.Remove(3);
-        currentTracks.Add(3);
+        pooledTrackScripts[0].EnableTrack();
+        availableTracks.Remove(0);
+        currentTracks.Add(0);
 
         AddTrack();
         AddTrack();
         AddTrack();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void AddTrack()
@@ -96,12 +91,13 @@ public class ProceduralGeneration : MonoBehaviour
         // index in the list of track collided with
         int collisionTrackIndex = currentTracks.IndexOf(trackID);
 
-        // if the index is greater than 1, meaning theres at least 3 tracks before it
-        // remove the tracks until theres only 2
-        if(collisionTrackIndex > MaxTrackLength - 1)
-        {
-            collisionTrackIndex -= MaxTrackLength;
+        // remove the backTrackLength from the index
+        collisionTrackIndex -= maxBackTrackLength;
 
+        // if the index is greater than 0, meaning theres at least maxBackTrackLength+1 tracks before it
+        // remove the tracks until theres only maxBackTrackLength tracks
+        if (collisionTrackIndex > 0)
+        {
             // loop through tracks to remove
             for(int i = 0; i < collisionTrackIndex; i++)
             {

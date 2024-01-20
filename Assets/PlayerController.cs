@@ -25,6 +25,13 @@ public class PlayerController : MonoBehaviour
         Force = GetComponent<ConstantForce>();
         Rigidbody = GetComponent<Rigidbody>();
         speed = MaxSpeed;
+
+        CurrentMoveDirection = transform.forward;
+        CurrentUpDirection = transform.up;
+        RightMoveDirection = transform.right;
+
+        TargetMoveDirection = transform.forward;
+        TargetUpDirection = transform.up;
     }
 
     private void Update()   

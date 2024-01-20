@@ -140,6 +140,18 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -153,19 +165,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6385022307140133405, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -341,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc4e5d90168f8d4abcf03009275702b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxTrackLength: 2
+  maxBackTrackLength: 1
   proceduralElements:
   - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
   - {fileID: 8410289366016849012, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
@@ -485,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9109985303210587680, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9109985303210587680, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_LocalRotation.w
