@@ -51,18 +51,29 @@ public class BezierPathGenerator : MonoBehaviour
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
-
-        for (int i = 0; i <= Segments; i++)
+        if (pointers.Count <= 0)
         {
-            //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
-            pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
-            turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
+            for (int i = 0; i <= Segments; i++)
+            {
+                //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
+                pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
+                turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
+            }
         }
+        else
+        {
+            for (int i = 0; i <= Segments; i++)
+            {
+                pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
+                pointers[i].transform.rotation = Rotations[i];
+            }
+        }
+
     }
 
     void Update()
     {
-        
+        /*
         //transform.eulerAngles = (Vector3.zero + (transform.parent.rotation.eulerAngles * 0.5f));
         a = Point1.transform.position;
         b = Point2.transform.position;
@@ -72,6 +83,7 @@ public class BezierPathGenerator : MonoBehaviour
         UpadateMesh();
 
         //GetComponent<MeshFilter>().mesh = mesh;
+
         for (int i = 0; i <= Segments; i++)
         {
             //platforms[i].transform.position = Positions[i];
@@ -83,32 +95,32 @@ public class BezierPathGenerator : MonoBehaviour
             //turningVolumeScript.PlayerMarkers = pointers.transform;
 
         }
-        
+        */
     }
 
     void UpadateMesh()
     {
-        for (int i = 0; i <= Segments;i++)// * 2; i++)
+        for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
 
             //if(i <= Segments){
             Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));
-                Vertices[(i * 2) + 1] = transform.parent.worldToLocalMatrix *( (Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3));
+            Vertices[(i * 2) + 1] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3));
             //}
             //else{
             //    Vertices[i * 2] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * -Vector3.right))-(Rotations[Segments -(i - Segments)] * Vector3.up);
             //    Vertices[(i * 2) + 1] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * Vector3.right)) - (Rotations[Segments -(i - Segments)] * Vector3.up);
             //}
-            
+
 
             if (i < Segments)
             {
                 Triangles[(i * 6)] = (i * 2);
-                Triangles[(i * 6) + 1] = (i*2) + 1;
-                Triangles[(i * 6) + 2] = (i * 2) + 2;  
-                Triangles[(i * 6) + 3] = (i * 2) + 1; 
-                Triangles[(i * 6) + 4] = (i * 2) + 3; 
-                Triangles[(i * 6) + 5] = (i* 2) + 2; 
+                Triangles[(i * 6) + 1] = (i * 2) + 1;
+                Triangles[(i * 6) + 2] = (i * 2) + 2;
+                Triangles[(i * 6) + 3] = (i * 2) + 1;
+                Triangles[(i * 6) + 4] = (i * 2) + 3;
+                Triangles[(i * 6) + 5] = (i * 2) + 2;
 
                 /*
                 Triangles[(i * 12) + 6] = (i) + 4;
@@ -125,7 +137,7 @@ public class BezierPathGenerator : MonoBehaviour
             Triangles[(((Segments) * 12) - 1) - i] = Triangles[i];
         }
         */
-        mesh.vertices = Vertices ;
+        mesh.vertices = Vertices;
         mesh.triangles = Triangles;
     }
 
@@ -162,5 +174,13 @@ public class BezierPathGenerator : MonoBehaviour
     Vector3 GetT(Vector3 a, Vector3 b, float t)
     {
         return a + ((b - a) * t);
+    }
+
+    void OnDestroy()
+    {
+        foreach (GameObject item in pointers)
+        {
+            Destroy(item);
+        }
     }
 }
