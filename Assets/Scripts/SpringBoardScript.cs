@@ -14,7 +14,7 @@ public class SpringBoardScript : MonoBehaviour
     {
         if(other.transform.tag == "Player")
         {
-            other.transform.GetComponent<Rigidbody>().AddForce(other.transform.GetComponent<PlayerController>().CurrentUpDirection * 25000, ForceMode.Force);
+            //other.transform.GetComponent<PlayerController>().ExtraForce += other.transform.GetComponent<PlayerController>().CurrentUpDirection * 500 * other.transform.GetComponent<PlayerController>().speed;
             animator.SetBool("Triggered", true);
             Destroy(GetComponent<BoxCollider>());
         }

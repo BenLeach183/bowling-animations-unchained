@@ -23,6 +23,8 @@ public class BezierPathGenerator : MonoBehaviour
 
     Mesh mesh;
 
+
+
     Vector3[] Vertices;
     Vector2[] UVs;
     int[] Triangles;
@@ -60,7 +62,8 @@ public class BezierPathGenerator : MonoBehaviour
 
     void Update()
     {
-        /*
+        
+        //transform.eulerAngles = (Vector3.zero + (transform.parent.rotation.eulerAngles * 0.5f));
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
@@ -80,7 +83,7 @@ public class BezierPathGenerator : MonoBehaviour
             //turningVolumeScript.PlayerMarkers = pointers.transform;
 
         }
-        */
+        
     }
 
     void UpadateMesh()
@@ -89,8 +92,8 @@ public class BezierPathGenerator : MonoBehaviour
         {
 
             //if(i <= Segments){
-                Vertices[i * 2] = (Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3);
-                Vertices[(i * 2) + 1] = (Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3);
+            Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));
+                Vertices[(i * 2) + 1] = transform.parent.worldToLocalMatrix *( (Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3));
             //}
             //else{
             //    Vertices[i * 2] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * -Vector3.right))-(Rotations[Segments -(i - Segments)] * Vector3.up);
@@ -122,7 +125,7 @@ public class BezierPathGenerator : MonoBehaviour
             Triangles[(((Segments) * 12) - 1) - i] = Triangles[i];
         }
         */
-        mesh.vertices = Vertices;
+        mesh.vertices = Vertices ;
         mesh.triangles = Triangles;
     }
 
@@ -139,7 +142,7 @@ public class BezierPathGenerator : MonoBehaviour
             }
             else
             {
-                Rotations.Add(Point1.transform.rotation);
+                Rotations.Add(Point1.transform.root.rotation);
             }
         }
     }

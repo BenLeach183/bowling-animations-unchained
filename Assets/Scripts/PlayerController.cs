@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentMoveDirection = Vector3.forward, CurrentUpDirection = Vector3.up , RightMoveDirection = Vector3.right, InputDirection = Vector3.zero;
     public Vector3 TargetMoveDirection = Vector3.forward, TargetUpDirection = Vector3.up;
 
+    public Vector3 ExtraForce = Vector3.zero;
 
     public float speed;
     public float MaxSpeed;
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()   
     {
-        
+        ExtraForce -= ExtraForce / 10f;
+
         RightMoveDirection = Vector3.Cross(CurrentUpDirection, CurrentMoveDirection);
 
         InputDirection = ((InputVector.x * RightMoveDirection) + (InputVector.y * CurrentMoveDirection)).normalized;
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
         Vector3 RelativeUpVel = Vector3.Scale(Rigidbody.velocity,CurrentUpDirection);
         RelativeUpVel = (CurrentUpDirection * -9.8f * speed * 1.5f);// RelativeUpVel + (CurrentUpDirection * -9.8f);
 
-        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 50) + (InputDirection * 20 * speed);
+        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 50) + (InputDirection * 20 * speed) + ExtraForce;
 
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed);
 
