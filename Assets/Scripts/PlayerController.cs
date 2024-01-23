@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         TargetUpDirection = transform.up;
     }
 
-    private void Update()   
+    private void FixedUpdate()   
     {
         
         RightMoveDirection = Vector3.Cross(CurrentUpDirection, CurrentMoveDirection);
@@ -42,17 +42,25 @@ public class PlayerController : MonoBehaviour
         InputDirection = ((InputVector.x * RightMoveDirection) + (InputVector.y * CurrentMoveDirection)).normalized;
 
         Vector3 RelativeUpVel = Vector3.Scale(Rigidbody.velocity,CurrentUpDirection);
-        RelativeUpVel = (CurrentUpDirection * -9.8f * speed * 30 * Time.deltaTime);// RelativeUpVel + (CurrentUpDirection * -9.8f);
+        RelativeUpVel = (CurrentUpDirection * -9.8f * speed * 1.5f);// RelativeUpVel + (CurrentUpDirection * -9.8f);
 
-        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 500 * Time.deltaTime) + (InputDirection * 200 * speed * Time.deltaTime);
+        Force.force = RelativeUpVel + (CurrentMoveDirection * speed * 50) + (InputDirection * 20 * speed);
 
-        Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed );
+        Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, speed);
+
+        CurrentMoveDirection = Vector3.Lerp(CurrentMoveDirection, TargetMoveDirection, 0.01f * speed);
+        CurrentUpDirection = Vector3.Lerp(CurrentUpDirection, TargetUpDirection, 0.01f * speed);
+    }
+
+    private void Update()
+    {
+
+       
 
         InputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         JoystickInput();
 
-        CurrentMoveDirection = Vector3.Lerp(CurrentMoveDirection, TargetMoveDirection, Time.deltaTime * speed);
-        CurrentUpDirection = Vector3.Lerp(CurrentUpDirection, TargetUpDirection, Time.deltaTime * speed);
+
 
     }
 
