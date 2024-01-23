@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 609478968771678991, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 119
+      objectReference: {fileID: 0}
     - target: {fileID: 6278787777266903266, guid: cef4f1f86064a744bbbf75d548e6db5e, type: 3}
       propertyPath: Player
       value: 
@@ -354,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBackTrackLength: 1
+  maxForwardTrackLength: 4
   proceduralElements:
   - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
   - {fileID: 8410289366016849012, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
@@ -473,11 +478,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 53518814079836957, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: speed
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 53518814079836957, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: MaxSpeed
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1185659512205548504, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_Name

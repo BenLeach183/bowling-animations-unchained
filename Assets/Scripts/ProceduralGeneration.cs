@@ -7,6 +7,9 @@ public class ProceduralGeneration : MonoBehaviour
 {
 
     public int maxBackTrackLength = 1;
+    public int maxForwardTrackLength = 4;
+
+    private int maxTotalTrackLength;
 
     // list of all types of track
     public GameObject[] proceduralElements;
@@ -26,6 +29,8 @@ public class ProceduralGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxTotalTrackLength = maxBackTrackLength + maxForwardTrackLength;
+
         // set size of pooled tracks, 2 instances per track type
         pooledTracks = new GameObject[proceduralElements.Length * numPooledObject];
         pooledTrackScripts = new FloorTrackObject[proceduralElements.Length * numPooledObject];
@@ -61,11 +66,18 @@ public class ProceduralGeneration : MonoBehaviour
         pooledTrackScripts[0].EnableTrack();
         availableTracks.Remove(0);
         currentTracks.Add(0);
-
-        AddTrack();
-        AddTrack();
-        AddTrack();
     }
+
+    private void Update()
+    {
+        // check if the total number of tracks is less than max total
+        if(currentTracks.Count < maxTotalTrackLength)
+        {
+            AddTrack();
+        }
+
+    }
+
 
     private void AddTrack()
     {
@@ -78,12 +90,15 @@ public class ProceduralGeneration : MonoBehaviour
         // pick a random track
         int trackID = availableTracks[Random.Range(0, availableTracks.Count)];
 
+        // connect the new track to end of current tracks
+        bool result = pooledTrackScripts[trackID].ConnectToPoint(pooledTrackScripts[endTrackID].endPos, pooledTrackScripts[endTrackID].endRot);
+
+        // if unable to place track return
+        if (!result) return;
+
         // remove the track from available and add to current
         availableTracks.Remove(trackID);
         currentTracks.Add(trackID);
-
-        // connect the new track to end of current tracks
-        pooledTrackScripts[trackID].ConnectToPoint(pooledTrackScripts[endTrackID].endPos, pooledTrackScripts[endTrackID].endRot);
     }
 
     private void ReleaseFirstTrack(int trackID)

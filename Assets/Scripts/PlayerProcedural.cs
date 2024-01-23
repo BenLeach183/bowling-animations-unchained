@@ -12,7 +12,7 @@ public class PlayerProcedural : MonoBehaviour
     {
         if (collision.gameObject.tag == "Track")
         {
-            TrackCollision(collision.gameObject);
+            //TrackCollision(collision.gameObject);
         }
     }
 

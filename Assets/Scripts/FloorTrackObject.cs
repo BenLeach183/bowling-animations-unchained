@@ -32,6 +32,8 @@ public class FloorTrackObject : MonoBehaviour
     public Vector3 endPos;
     public Quaternion endRot;
 
+    public BoxCollider overlapBoundary;
+
     // update the default values
     public void Awake()
     {
@@ -66,12 +68,25 @@ public class FloorTrackObject : MonoBehaviour
         endPos = newPos + (rotateTo*localEndPos);
         endRot = rotateTo*localEndRot;
 
+        // check whether the track overlaps exisiting track
+        if (CheckForOverlap()) return false;
+
+        // if no overlap continue
+
         // activate the object
         this.gameObject.SetActive(true);
         trackEnabled = true;
 
         // return true if succesful
         return true;
+    }
+
+    // checks whether the track overlaps an exisiting track
+    private bool CheckForOverlap()
+    {
+        LayerMask trackMask = LayerMask.GetMask("Track");
+
+        return Physics.CheckBox(overlapBoundary.bounds.center, overlapBoundary.bounds.extents, transform.rotation, trackMask, QueryTriggerInteraction.Ignore);
     }
 
     public void EnableTrack()
