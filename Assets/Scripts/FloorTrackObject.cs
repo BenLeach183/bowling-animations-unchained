@@ -65,7 +65,7 @@ public class FloorTrackObject : MonoBehaviour
         localStartRot = rotation;
     }
 
-    private void UpdateEndPoint(Quaternion rotation, Vector3 position)
+    public void UpdateEndPoint(Quaternion rotation, Vector3 position)
     {
         localEndPos = position;
         localEndRot = rotation;

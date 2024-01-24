@@ -146,15 +146,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalBoundingSphere:
-    position: {x: 0, y: 0, z: 0}
-    radius: 1
-  boundingSpheres: []
+    position: {x: 0.08, y: 0, z: -3.77}
+    radius: 10.4
+  boundingSpheres:
+  - position: {x: 3.66, y: 0, z: 2}
+    radius: 3
+  - position: {x: 3.66, y: 0, z: -2}
+    radius: 3
+  - position: {x: -0.85, y: 0, z: -2}
+    radius: 3
+  - position: {x: -0.85, y: 0, z: 2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: 2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: -2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: -8.1}
+    radius: 3.99
+  - position: {x: -1.63, y: 0, z: -8.1}
+    radius: 3.99
   connected: 0
   trackEnabled: 0
   trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
-  overlapBoundary: {fileID: 8857380768563511410}
 --- !u!65 &8857380768563511410
 BoxCollider:
   m_ObjectHideFlags: 0

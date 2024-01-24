@@ -293,8 +293,22 @@ MonoBehaviour:
     position: {x: 0.08, y: 0, z: 3.77}
     radius: 10.4
   boundingSpheres:
-  - position: {x: -0.09, y: 0, z: 2}
+  - position: {x: 3.66, y: 0, z: 2}
     radius: 3
+  - position: {x: 3.66, y: 0, z: -2}
+    radius: 3
+  - position: {x: -0.85, y: 0, z: -2}
+    radius: 3
+  - position: {x: -0.85, y: 0, z: 2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: 2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: -2}
+    radius: 3
+  - position: {x: -5.67, y: 0, z: 8.1}
+    radius: 3.99
+  - position: {x: -8.3, y: 0, z: 8.1}
+    radius: 3.99
   connected: 0
   trackEnabled: 0
   trackID: 0
