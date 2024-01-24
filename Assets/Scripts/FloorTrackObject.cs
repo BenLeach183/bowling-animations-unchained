@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +18,7 @@ public class FloorTrackObject : MonoBehaviour
 
     // array if smaller spheres to detect if track collides with nearby tracks within bigger sphere
     [SerializeField]
-    public BoundingSphereData[] boundingSpheres;
+    public List<BoundingSphereData> boundingSpheres;
 
     // whether the track has been connected to the next track
     public bool connected = false;
@@ -59,6 +61,20 @@ public class FloorTrackObject : MonoBehaviour
 
     }
 
+    public void UpdateBoundingSpheres(Vector3 position, float radius, int index){
+        if(index >= boundingSpheres.Count)
+        {
+            boundingSpheres.Add(new BoundingSphereData());
+            boundingSpheres[boundingSpheres.Count - 1].SetPosition(position);
+            boundingSpheres[boundingSpheres.Count - 1].SetRadius(radius);
+        }
+        else
+        {
+            boundingSpheres[index].SetPosition(position);
+            boundingSpheres[index].SetRadius(radius);
+        }
+    }
+
     public void UpdateStartPoint(Quaternion rotation, Vector3 position)
     {
         localStartPos = position;
@@ -79,13 +95,10 @@ public class FloorTrackObject : MonoBehaviour
         // reset the bounding sphere's rotation
         Quaternion inverseCurrent = Quaternion.Inverse(currentRotation);
         totalBoundingSphere.Rotate(inverseCurrent);
-        for (int i = 0; i < boundingSpheres.Length; i++)
+        for (int i = 0; i < boundingSpheres.Count; i++)
         {
             boundingSpheres[i].Rotate(inverseCurrent);
         }
-
-        // invoke the track added event
-        trackAdded.Invoke();
 
         // find the rotation ( multiplying by inverse subtracts rotation)
         Quaternion rotateTo = rotation * Quaternion.Inverse(localStartRot);
@@ -95,7 +108,7 @@ public class FloorTrackObject : MonoBehaviour
 
         // set the bounding sphere's rotation
         totalBoundingSphere.Rotate(currentRotation);
-        for (int i = 0; i < boundingSpheres.Length; i++)
+        for (int i = 0; i < boundingSpheres.Count; i++)
         {
             boundingSpheres[i].Rotate(currentRotation);
         }
@@ -116,6 +129,9 @@ public class FloorTrackObject : MonoBehaviour
         // activate the object
         this.gameObject.SetActive(true);
         trackEnabled = true;
+
+        // invoke the track added event
+        trackAdded.Invoke();
 
         // return true if succesful
         return true;
@@ -142,7 +158,7 @@ public class FloorTrackObject : MonoBehaviour
 
         Gizmos.color = new Color(1.0f, 0.2f, 0.0f, 0.5f);
 
-        for (int i = 0; i < boundingSpheres.Length; i++)
+        for (int i = 0; i < boundingSpheres.Count; i++)
         {
             Gizmos.DrawSphere(transform.position + boundingSpheres[i].GetPosition(), boundingSpheres[i].GetRadius());
         }

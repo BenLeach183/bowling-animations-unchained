@@ -57,32 +57,27 @@ public class BezierPathGenerator : MonoBehaviour
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
-        if (pointers.Count <= 0)
+
+        for (int i = 0; i <= Segments; i++)
         {
-            for (int i = 0; i <= Segments; i++)
-            {
-                //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
-                pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
-                turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
-            }
+            //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
+            pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
+            turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
+            floorTrackObject.UpdateBoundingSpheres(Positions[i],3.0f,i);
         }
-        else
-        {
-            for (int i = 0; i <= Segments; i++)
-            {
-                pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
-                pointers[i].transform.rotation = Rotations[i];
-            }
-        }
+        
+
 
     }
 
-    void Update()
+    public void ReuseUpdate()
     {
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
         d = Point4.transform.position;
+
+        c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
         RasterizeBezier();
         UpadateMesh();
@@ -91,6 +86,7 @@ public class BezierPathGenerator : MonoBehaviour
         {
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
+            floorTrackObject.UpdateBoundingSpheres(Positions[i],3.0f,i);
         }
         
     }

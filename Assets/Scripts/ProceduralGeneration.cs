@@ -151,18 +151,18 @@ public class ProceduralGeneration : MonoBehaviour
     private bool CheckDetailedOverlap(int trackID, int otherTrackID)
     {
         // get the list of detailed bounding spheres
-        BoundingSphereData[] boundingSpheres = pooledTrackScripts[trackID].boundingSpheres;
-        BoundingSphereData[] otherBoundingSpheres = pooledTrackScripts[otherTrackID].boundingSpheres;
+        List<BoundingSphereData> boundingSpheres = pooledTrackScripts[trackID].boundingSpheres;
+        List<BoundingSphereData> otherBoundingSpheres = pooledTrackScripts[otherTrackID].boundingSpheres;
 
         // get the positions of tracks
         Vector3 offset = pooledTrackScripts[trackID].transform.position;
         Vector3 otherOffset = pooledTrackScripts[otherTrackID].transform.position;
 
         // loop over bounding spheres in first list
-        for(int i = 0; i < boundingSpheres.Length; i++)
+        for(int i = 0; i < boundingSpheres.Count; i++)
         {
             // loop over bounding spheres in second list
-            for(int j = 0; j < otherBoundingSpheres.Length; j++)
+            for(int j = 0; j < otherBoundingSpheres.Count; j++)
             {
                 // check if the spheres intersect
                 bool overlap = CheckSphereOverlap(boundingSpheres[i], offset, otherBoundingSpheres[j], otherOffset);

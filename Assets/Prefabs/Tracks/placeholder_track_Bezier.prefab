@@ -90,7 +90,19 @@ MonoBehaviour:
   endRot: {x: 0, y: 0, z: 0, w: 0}
   trackAdded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4433303307410564596}
+        m_TargetAssemblyTypeName: BezierPathGenerator, Assembly-CSharp
+        m_MethodName: ReuseUpdate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &3816009873671225281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,6 +174,10 @@ PrefabInstance:
     - target: {fileID: 750039265636312215, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_LocalPosition.z
       value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 871884118283180752, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2066273415113776042, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -288,6 +304,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
+--- !u!114 &4433303307410564596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7474463776320496457, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
+  m_PrefabInstance: {fileID: 6502319260090418877}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb182f713cef05246afc83db4c29b0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8302030866888497499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2957279445706694630, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
