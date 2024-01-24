@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 /*
   Each track object has this script
@@ -40,6 +41,8 @@ public class FloorTrackObject : MonoBehaviour
     // store the current rotation of the object
     private Quaternion currentRotation = Quaternion.identity;
 
+    public UnityEvent trackAdded;
+
     // update the default values
     public void Awake()
     {
@@ -80,6 +83,9 @@ public class FloorTrackObject : MonoBehaviour
         {
             boundingSpheres[i].Rotate(inverseCurrent);
         }
+
+        // invoke the track added event
+        trackAdded.Invoke();
 
         // find the rotation ( multiplying by inverse subtracts rotation)
         Quaternion rotateTo = rotation * Quaternion.Inverse(localStartRot);

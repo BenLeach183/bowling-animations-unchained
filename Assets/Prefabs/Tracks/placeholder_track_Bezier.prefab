@@ -88,6 +88,9 @@ MonoBehaviour:
   trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
+  trackAdded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &3816009873671225281
 BoxCollider:
   m_ObjectHideFlags: 0
