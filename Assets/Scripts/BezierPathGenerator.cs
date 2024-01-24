@@ -32,8 +32,7 @@ public class BezierPathGenerator : MonoBehaviour
 
     void Awake()
     {
-        Positions = new List<Vector3>();
-        Rotations = new List<Quaternion>();
+        // initialize variables
         pointers = new List<GameObject>();
         mesh = new Mesh();
 
@@ -52,7 +51,7 @@ public class BezierPathGenerator : MonoBehaviour
         c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
         RasterizeBezier();
-        UpadateMesh();
+        UpdateMesh();
         UpdateConstrictionPoints();
 
         GetComponent<MeshFilter>().mesh = mesh;
@@ -63,7 +62,7 @@ public class BezierPathGenerator : MonoBehaviour
             //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
             pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
             turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
-            floorTrackObject.UpdateBoundingSpheres(Positions[i],3.0f,i);
+            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
         }
         
 
@@ -80,13 +79,13 @@ public class BezierPathGenerator : MonoBehaviour
         c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
         RasterizeBezier();
-        UpadateMesh();
+        UpdateMesh();
         UpdateConstrictionPoints();
         for (int i = 0; i <= Segments; i++)
         {
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
-            floorTrackObject.UpdateBoundingSpheres(Positions[i],3.0f,i);
+            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
         }
         
     }
@@ -95,7 +94,7 @@ public class BezierPathGenerator : MonoBehaviour
         floorTrackObject.UpdateEndPoint(Rotations[Rotations.Count - 1], Positions[Positions.Count - 1]);
     }
 
-    void UpadateMesh()
+    void UpdateMesh()
     {
         mesh.Clear();
 
