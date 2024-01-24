@@ -42,10 +42,14 @@ public class BezierPathGenerator : MonoBehaviour
         Triangles = new int[(Segments) * 6];//12];
         //platforms = new List<GameObject>();
 
+        
+
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
         d = Point4.transform.position;
+
+        c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
         RasterizeBezier();
         UpadateMesh();
@@ -99,16 +103,8 @@ public class BezierPathGenerator : MonoBehaviour
     {
         for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
-
-            //if(i <= Segments){
             Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));
             Vertices[(i * 2) + 1] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3));
-            //}
-            //else{
-            //    Vertices[i * 2] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * -Vector3.right))-(Rotations[Segments -(i - Segments)] * Vector3.up);
-            //    Vertices[(i * 2) + 1] = ((Positions[Segments -(i - Segments)] - transform.position) - (Rotations[Segments -(i - Segments)] * Vector3.right)) - (Rotations[Segments -(i - Segments)] * Vector3.up);
-            //}
-
 
             if (i < Segments)
             {
@@ -118,22 +114,8 @@ public class BezierPathGenerator : MonoBehaviour
                 Triangles[(i * 6) + 3] = (i * 2) + 1;
                 Triangles[(i * 6) + 4] = (i * 2) + 3;
                 Triangles[(i * 6) + 5] = (i * 2) + 2;
-
-                /*
-                Triangles[(i * 12) + 6] = (i) + 4;
-                Triangles[(i * 12) + 1+ 6] = (i * 2) + 1+ 4;
-                Triangles[(i * 12) + 2+ 6] = (i * 2) + 2+ 4;
-                Triangles[(i * 12) + 3+ 6] = (i * 2) + 1+ 4;
-                Triangles[(i * 12) + 4+ 6] = (i * 2) + 3+ 4;
-                Triangles[(i * 12) + 5+6] = (i * 2) + 2+ 4;
-                */
             }
         }
-        /*
-        for(int i = 0; i < (Segments) * 6; i++){
-            Triangles[(((Segments) * 12) - 1) - i] = Triangles[i];
-        }
-        */
         mesh.vertices = Vertices;
         mesh.triangles = Triangles;
     }
@@ -151,7 +133,7 @@ public class BezierPathGenerator : MonoBehaviour
             }
             else
             {
-                Rotations.Add(Point1.transform.root.rotation);
+                Rotations.Add(Point1.transform.parent.rotation);
             }
         }
     }
