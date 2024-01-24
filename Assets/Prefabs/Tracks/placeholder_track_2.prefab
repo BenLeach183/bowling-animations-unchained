@@ -412,7 +412,7 @@ MonoBehaviour:
     radius: 5.35
   - position: {x: 13.9, y: 2.95, z: 11}
     radius: 5.35
-  - position: {x: 7.56, y: 2.95, z: 14}
+  - position: {x: 8.71, y: 2.95, z: 14.3}
     radius: 5.35
   connected: 0
   trackEnabled: 0

@@ -159,14 +159,14 @@ MonoBehaviour:
     radius: 3.01
   - position: {x: 3.43, y: 0, z: 2.21}
     radius: 3.01
-  - position: {x: -1.18, y: 0, z: 2.21}
-    radius: 3.17
-  - position: {x: -1.18, y: 0, z: -2.21}
-    radius: 3.17
-  - position: {x: -5.84, y: 0, z: -2.21}
-    radius: 3.17
-  - position: {x: -5.84, y: 0, z: 2.21}
-    radius: 3.17
+  - position: {x: 0.08, y: 0, z: 2.21}
+    radius: 3.01
+  - position: {x: 0.08, y: 0, z: -2.21}
+    radius: 3.01
+  - position: {x: -3.97, y: 0, z: -2.21}
+    radius: 3.01
+  - position: {x: -3.97, y: 0, z: 2.21}
+    radius: 3.01
   connected: 0
   trackEnabled: 0
   trackID: 0

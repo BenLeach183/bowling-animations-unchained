@@ -40,7 +40,8 @@ public class FloorTrackObject : MonoBehaviour
     public Vector3 endPos;
     public Quaternion endRot;
 
-    //public BoxCollider overlapBoundary;
+    // store the current rotation of the object
+    private Quaternion currentRotation = Quaternion.identity;
 
     // update the default values
     public void Awake()
@@ -75,9 +76,27 @@ public class FloorTrackObject : MonoBehaviour
 
     public bool ConnectToPoint(Vector3 position, Quaternion rotation)
     {
+        // reset the bounding sphere's rotation
+        Quaternion inverseCurrent = Quaternion.Inverse(currentRotation);
+        totalBoundingSphere.Rotate(inverseCurrent);
+        for (int i = 0; i < boundingSpheres.Length; i++)
+        {
+            boundingSpheres[i].Rotate(inverseCurrent);
+        }
+
         // find the rotation ( multiplying by inverse subtracts rotation)
         Quaternion rotateTo = rotation * Quaternion.Inverse(localStartRot);
-        
+
+        // store the current rotation
+        currentRotation = rotateTo;
+
+        // set the bounding sphere's rotation
+        totalBoundingSphere.Rotate(currentRotation);
+        for (int i = 0; i < boundingSpheres.Length; i++)
+        {
+            boundingSpheres[i].Rotate(currentRotation);
+        }
+
         // update the rotation
         this.transform.rotation = rotateTo;
 
@@ -91,25 +110,12 @@ public class FloorTrackObject : MonoBehaviour
         endPos = newPos + (rotateTo*localEndPos);
         endRot = rotateTo*localEndRot;
 
-        // check whether the track overlaps exisiting track
-        if (CheckForOverlap()) return false;
-
-        // if no overlap continue
-
         // activate the object
         this.gameObject.SetActive(true);
         trackEnabled = true;
 
         // return true if succesful
         return true;
-    }
-
-    // checks whether the track overlaps an exisiting track
-    private bool CheckForOverlap()
-    {
-        LayerMask trackMask = LayerMask.GetMask("Track");
-        return false;
-        //return Physics.CheckBox(overlapBoundary.bounds.center, overlapBoundary.bounds.extents, transform.rotation, trackMask, QueryTriggerInteraction.Ignore);
     }
 
     public void EnableTrack()
