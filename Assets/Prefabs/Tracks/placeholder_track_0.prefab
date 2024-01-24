@@ -155,14 +155,23 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     radius: 8.83
   boundingSpheres:
-  - position: {x: 2.64, y: 0, z: -2.21}
+  - position: {x: 3.43, y: 0, z: -2.21}
     radius: 3.01
+  - position: {x: 3.43, y: 0, z: 2.21}
+    radius: 3.01
+  - position: {x: -1.18, y: 0, z: 2.21}
+    radius: 3.17
+  - position: {x: -1.18, y: 0, z: -2.21}
+    radius: 3.17
+  - position: {x: -5.84, y: 0, z: -2.21}
+    radius: 3.17
+  - position: {x: -5.84, y: 0, z: 2.21}
+    radius: 3.17
   connected: 0
   trackEnabled: 0
   trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
-  overlapBoundary: {fileID: 0}
 --- !u!1 &5936716934525460035
 GameObject:
   m_ObjectHideFlags: 0

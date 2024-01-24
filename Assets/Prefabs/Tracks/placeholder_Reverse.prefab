@@ -263,6 +263,126 @@ PrefabInstance:
       propertyPath: m_Name
       value: placeholder_Reverse
       objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: totalBoundingSphere.radius
+      value: 11.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: totalBoundingSphere.position.x
+      value: -1.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: totalBoundingSphere.position.y
+      value: 4.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[6].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[7].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[8].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[9].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[10].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[11].radius
+      value: 3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[5].position.x
+      value: -5.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[5].position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[6].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[6].position.y
+      value: 4.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[6].position.z
+      value: -2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[7].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[7].position.y
+      value: 4.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[7].position.z
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[8].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[8].position.y
+      value: 8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[8].position.z
+      value: -2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[9].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[9].position.y
+      value: 8.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[9].position.z
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[10].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[10].position.y
+      value: 12.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[10].position.z
+      value: -2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[11].position.x
+      value: -6.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[11].position.y
+      value: 12.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: boundingSpheres.Array.data[11].position.z
+      value: 2.21
+      objectReference: {fileID: 0}
     - target: {fileID: 8987911623650543174, guid: 56af56506d09b774086de03a0ed70570, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5

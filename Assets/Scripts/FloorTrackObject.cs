@@ -59,6 +59,21 @@ public class FloorTrackObject : MonoBehaviour
 
     }
 
+    public void UpdateStartPoint(Quaternion rotation, Vector3 position)
+    {
+        localStartPos = position;
+        localStartRot = rotation;
+    }
+
+    private void UpdateEndPoint(Quaternion rotation, Vector3 position)
+    {
+        localEndPos = position;
+        localEndRot = rotation;
+
+        endPos = localEndPos;
+        endRot = localEndRot;
+    }
+
     public bool ConnectToPoint(Vector3 position, Quaternion rotation)
     {
         // find the rotation ( multiplying by inverse subtracts rotation)
@@ -114,7 +129,6 @@ public class FloorTrackObject : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0.3f, 1.0f, 0.0f, 1.0f);
-        //Gizmos.DrawSphere(transform.position, radius);
         Gizmos.DrawWireSphere(transform.position + totalBoundingSphere.GetPosition(), totalBoundingSphere.GetRadius());
 
 
