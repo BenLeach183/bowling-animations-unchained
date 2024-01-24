@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: cd81b17e887e7974f897add76ae54738, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d6fab56fa59b3324b82d34f8d2b51daa, type: 2}
+      objectReference: {fileID: 2100000, guid: d45d666757b1e284f9ccb14abae22e34, type: 2}
     - target: {fileID: 919132149155446097, guid: cd81b17e887e7974f897add76ae54738, type: 3}
       propertyPath: m_Name
       value: BananaPeel

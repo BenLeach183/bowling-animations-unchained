@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2ba45bba36eacdf408d582e38bc6b666, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c08f0dbd893e1b141a1de0e4db69e9a7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6dde5f96ad67d294f81ea96f4f589006, type: 2}
     - target: {fileID: 919132149155446097, guid: 2ba45bba36eacdf408d582e38bc6b666, type: 3}
       propertyPath: m_Name
       value: FireHydrant

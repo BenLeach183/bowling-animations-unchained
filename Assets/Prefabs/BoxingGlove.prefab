@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3f75a7bceb1ed654ca1f79c929d7a976, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 29c6144e67e0d794896cff0f51911dc6, type: 2}
+      objectReference: {fileID: 2100000, guid: bfca4af9a12b0ca49a78bf1cd054dc47, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f75a7bceb1ed654ca1f79c929d7a976, type: 3}
       propertyPath: m_Name
       value: BoxingGlove
