@@ -162,7 +162,6 @@ MonoBehaviour:
   trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
-  overlapBoundary: {fileID: 3816009873671225281}
 --- !u!65 &3816009873671225281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -351,6 +350,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 3.3
       objectReference: {fileID: 0}
+    - target: {fileID: 7474463776320496457, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
+      propertyPath: floorTrackObject
+      value: 
+      objectReference: {fileID: 8105901780365224059}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -6,6 +6,7 @@ public class BezierPathGenerator : MonoBehaviour
 {
     public GameObject Point1, Point2, Point3, Point4;
 
+    public FloorTrackObject floorTrackObject;
     public TurningVolumeScript turningVolumeScript;
     public GameObject pointer;
     public GameObject platform;
@@ -48,6 +49,7 @@ public class BezierPathGenerator : MonoBehaviour
 
         RasterizeBezier();
         UpadateMesh();
+        UpdateConstrictionPoints();
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -73,29 +75,24 @@ public class BezierPathGenerator : MonoBehaviour
 
     void Update()
     {
-        /*
-        //transform.eulerAngles = (Vector3.zero + (transform.parent.rotation.eulerAngles * 0.5f));
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
         d = Point4.transform.position;
+
         RasterizeBezier();
         UpadateMesh();
-
-        //GetComponent<MeshFilter>().mesh = mesh;
-
+        UpdateConstrictionPoints();
         for (int i = 0; i <= Segments; i++)
         {
-            //platforms[i].transform.position = Positions[i];
-            //platforms[i].transform.rotation = Rotations[i];
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
-
-
-            //turningVolumeScript.PlayerMarkers = pointers.transform;
-
         }
-        */
+        
+    }
+    void UpdateConstrictionPoints()
+    {
+        floorTrackObject.UpdateEndPoint(Rotations[Rotations.Count - 1], Positions[Positions.Count - 1]);
     }
 
     void UpadateMesh()
