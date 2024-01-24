@@ -14,12 +14,11 @@ public class FloorTrackObject : MonoBehaviour
 {
     [SerializeField]
     // one sphere that covers the entire object (for optimization)
-    private BoundingSphereData totalBoundingSphere = new BoundingSphereData();
+    public BoundingSphereData totalBoundingSphere = new BoundingSphereData();
 
     // array if smaller spheres to detect if track collides with nearby tracks within bigger sphere
     [SerializeField]
-    private BoundingSphereData[] boundingSpheres;
-
+    public BoundingSphereData[] boundingSpheres;
 
     // whether the track has been connected to the next track
     public bool connected = false;
