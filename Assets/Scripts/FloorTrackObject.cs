@@ -12,6 +12,15 @@ using UnityEngine.UIElements;
 
 public class FloorTrackObject : MonoBehaviour
 {
+    [SerializeField]
+    // one sphere that covers the entire object (for optimization)
+    private BoundingSphereData totalBoundingSphere = new BoundingSphereData();
+
+    // array if smaller spheres to detect if track collides with nearby tracks within bigger sphere
+    [SerializeField]
+    private BoundingSphereData[] boundingSpheres;
+
+
     // whether the track has been connected to the next track
     public bool connected = false;
 
@@ -32,7 +41,7 @@ public class FloorTrackObject : MonoBehaviour
     public Vector3 endPos;
     public Quaternion endRot;
 
-    public BoxCollider overlapBoundary;
+    //public BoxCollider overlapBoundary;
 
     // update the default values
     public void Awake()
@@ -85,8 +94,8 @@ public class FloorTrackObject : MonoBehaviour
     private bool CheckForOverlap()
     {
         LayerMask trackMask = LayerMask.GetMask("Track");
-
-        return Physics.CheckBox(overlapBoundary.bounds.center, overlapBoundary.bounds.extents, transform.rotation, trackMask, QueryTriggerInteraction.Ignore);
+        return false;
+        //return Physics.CheckBox(overlapBoundary.bounds.center, overlapBoundary.bounds.extents, transform.rotation, trackMask, QueryTriggerInteraction.Ignore);
     }
 
     public void EnableTrack()
@@ -100,5 +109,20 @@ public class FloorTrackObject : MonoBehaviour
         connected = false;
         trackEnabled = false;
         this.gameObject.SetActive(false);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.3f, 1.0f, 0.0f, 1.0f);
+        //Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position + totalBoundingSphere.GetPosition(), totalBoundingSphere.GetRadius());
+
+
+        Gizmos.color = new Color(1.0f, 0.2f, 0.0f, 0.5f);
+
+        for (int i = 0; i < boundingSpheres.Length; i++)
+        {
+            Gizmos.DrawSphere(transform.position + boundingSpheres[i].GetPosition(), boundingSpheres[i].GetRadius());
+        }
     }
 }
