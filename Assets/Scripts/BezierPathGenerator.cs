@@ -30,7 +30,7 @@ public class BezierPathGenerator : MonoBehaviour
     Vector2[] UVs;
     int[] Triangles;
 
-    void Start()
+    void Awake()
     {
         Positions = new List<Vector3>();
         Rotations = new List<Quaternion>();
@@ -97,6 +97,8 @@ public class BezierPathGenerator : MonoBehaviour
 
     void UpadateMesh()
     {
+        mesh.Clear();
+
         for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
             Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));
