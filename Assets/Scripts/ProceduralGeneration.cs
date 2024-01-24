@@ -91,7 +91,9 @@ public class ProceduralGeneration : MonoBehaviour
         int trackID = availableTracks[Random.Range(0, availableTracks.Count)];
 
         // connect the new track to end of current tracks
-        bool result = pooledTrackScripts[trackID].ConnectToPoint(pooledTrackScripts[endTrackID].endPos, pooledTrackScripts[endTrackID].endRot);
+        pooledTrackScripts[trackID].ConnectToPoint(pooledTrackScripts[endTrackID].endPos, pooledTrackScripts[endTrackID].endRot);
+
+        bool result = CheckOverlap(trackID);
 
         // if unable to place track return
         if (!result) return;
@@ -99,6 +101,14 @@ public class ProceduralGeneration : MonoBehaviour
         // remove the track from available and add to current
         availableTracks.Remove(trackID);
         currentTracks.Add(trackID);
+    }
+
+    private bool CheckOverlap(int trackID)
+    {
+
+
+
+        return false;
     }
 
     private void ReleaseFirstTrack(int trackID)
