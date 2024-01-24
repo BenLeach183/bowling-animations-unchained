@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 /*
   Each track object has this script
@@ -18,7 +18,7 @@ public class FloorTrackObject : MonoBehaviour
 
     // array if smaller spheres to detect if track collides with nearby tracks within bigger sphere
     [SerializeField]
-    public BoundingSphereData[] boundingSpheres;
+    public List<BoundingSphereData> boundingSpheres;
 
     // whether the track has been connected to the next track
     public bool connected = false;
@@ -40,7 +40,10 @@ public class FloorTrackObject : MonoBehaviour
     public Vector3 endPos;
     public Quaternion endRot;
 
-    //public BoxCollider overlapBoundary;
+    // store the current rotation of the object
+    private Quaternion currentRotation = Quaternion.identity;
+
+    public UnityEvent trackAdded;
 
     // update the default values
     public void Awake()
@@ -56,6 +59,20 @@ public class FloorTrackObject : MonoBehaviour
         endPos = localEndPos;
         endRot = localEndRot;
 
+    }
+
+    public void UpdateBoundingSpheres(Vector3 position, float radius, int index){
+        if(index >= boundingSpheres.Count)
+        {
+            boundingSpheres.Add(new BoundingSphereData());
+            boundingSpheres[boundingSpheres.Count - 1].SetPosition(position);
+            boundingSpheres[boundingSpheres.Count - 1].SetRadius(radius);
+        }
+        else
+        {
+            boundingSpheres[index].SetPosition(position);
+            boundingSpheres[index].SetRadius(radius);
+        }
     }
 
     public void UpdateStartPoint(Quaternion rotation, Vector3 position)
@@ -75,9 +92,27 @@ public class FloorTrackObject : MonoBehaviour
 
     public bool ConnectToPoint(Vector3 position, Quaternion rotation)
     {
+        // reset the bounding sphere's rotation
+        Quaternion inverseCurrent = Quaternion.Inverse(currentRotation);
+        totalBoundingSphere.Rotate(inverseCurrent);
+        for (int i = 0; i < boundingSpheres.Count; i++)
+        {
+            boundingSpheres[i].Rotate(inverseCurrent);
+        }
+
         // find the rotation ( multiplying by inverse subtracts rotation)
         Quaternion rotateTo = rotation * Quaternion.Inverse(localStartRot);
-        
+
+        // store the current rotation
+        currentRotation = rotateTo;
+
+        // set the bounding sphere's rotation
+        totalBoundingSphere.Rotate(currentRotation);
+        for (int i = 0; i < boundingSpheres.Count; i++)
+        {
+            boundingSpheres[i].Rotate(currentRotation);
+        }
+
         // update the rotation
         this.transform.rotation = rotateTo;
 
@@ -91,25 +126,15 @@ public class FloorTrackObject : MonoBehaviour
         endPos = newPos + (rotateTo*localEndPos);
         endRot = rotateTo*localEndRot;
 
-        // check whether the track overlaps exisiting track
-        if (CheckForOverlap()) return false;
-
-        // if no overlap continue
-
         // activate the object
         this.gameObject.SetActive(true);
         trackEnabled = true;
 
+        // invoke the track added event
+        trackAdded.Invoke();
+
         // return true if succesful
         return true;
-    }
-
-    // checks whether the track overlaps an exisiting track
-    private bool CheckForOverlap()
-    {
-        LayerMask trackMask = LayerMask.GetMask("Track");
-        return false;
-        //return Physics.CheckBox(overlapBoundary.bounds.center, overlapBoundary.bounds.extents, transform.rotation, trackMask, QueryTriggerInteraction.Ignore);
     }
 
     public void EnableTrack()
@@ -133,7 +158,7 @@ public class FloorTrackObject : MonoBehaviour
 
         Gizmos.color = new Color(1.0f, 0.2f, 0.0f, 0.5f);
 
-        for (int i = 0; i < boundingSpheres.Length; i++)
+        for (int i = 0; i < boundingSpheres.Count; i++)
         {
             Gizmos.DrawSphere(transform.position + boundingSpheres[i].GetPosition(), boundingSpheres[i].GetRadius());
         }

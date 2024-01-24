@@ -1,5 +1,4 @@
 using System;
-using UnityEditorInternal;
 using UnityEngine;
 
 [Serializable]
@@ -23,6 +22,16 @@ public class BoundingSphereData
         this.radius = radius;
     }
 
+    public void SetPosition(Vector3 position)
+    {
+        this.position = position;
+    }
+
+    public void SetRadius(float radius)
+    {
+        this.radius = radius;
+    }
+
     public Vector3 GetPosition()
     {
         return position;
@@ -31,5 +40,10 @@ public class BoundingSphereData
     public float GetRadius()
     {
         return radius;
+    }
+
+    public void Rotate(Quaternion rotation)
+    {
+        position = rotation * position;
     }
 }

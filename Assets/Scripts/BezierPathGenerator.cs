@@ -30,10 +30,9 @@ public class BezierPathGenerator : MonoBehaviour
     Vector2[] UVs;
     int[] Triangles;
 
-    void Start()
+    void Awake()
     {
-        Positions = new List<Vector3>();
-        Rotations = new List<Quaternion>();
+        // initialize variables
         pointers = new List<GameObject>();
         mesh = new Mesh();
 
@@ -52,45 +51,41 @@ public class BezierPathGenerator : MonoBehaviour
         c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
         RasterizeBezier();
-        UpadateMesh();
+        UpdateMesh();
         UpdateConstrictionPoints();
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
-        if (pointers.Count <= 0)
+
+        for (int i = 0; i <= Segments; i++)
         {
-            for (int i = 0; i <= Segments; i++)
-            {
-                //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
-                pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
-                turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
-            }
+            //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
+            pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
+            turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
+            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
         }
-        else
-        {
-            for (int i = 0; i <= Segments; i++)
-            {
-                pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
-                pointers[i].transform.rotation = Rotations[i];
-            }
-        }
+        
+
 
     }
 
-    void Update()
+    public void ReuseUpdate()
     {
         a = Point1.transform.position;
         b = Point2.transform.position;
         c = Point3.transform.position;
         d = Point4.transform.position;
 
+        c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
+
         RasterizeBezier();
-        UpadateMesh();
+        UpdateMesh();
         UpdateConstrictionPoints();
         for (int i = 0; i <= Segments; i++)
         {
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
+            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
         }
         
     }
@@ -99,8 +94,10 @@ public class BezierPathGenerator : MonoBehaviour
         floorTrackObject.UpdateEndPoint(Rotations[Rotations.Count - 1], Positions[Positions.Count - 1]);
     }
 
-    void UpadateMesh()
+    void UpdateMesh()
     {
+        mesh.Clear();
+
         for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
             Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));

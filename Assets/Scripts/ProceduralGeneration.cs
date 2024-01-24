@@ -96,7 +96,11 @@ public class ProceduralGeneration : MonoBehaviour
         bool result = CheckOverlap(trackID);
 
         // if unable to place track return
-        if (!result) return;
+        if (result)
+        {
+            pooledTrackScripts[trackID].Despawn();
+            return;
+        }
 
         // remove the track from available and add to current
         availableTracks.Remove(trackID);
@@ -105,14 +109,89 @@ public class ProceduralGeneration : MonoBehaviour
 
     private bool CheckOverlap(int trackID)
     {
+        return CheckBigOverlap(trackID);
+    }
 
+    private bool CheckBigOverlap(int trackID)
+    {
+        // get the bounding sphere and position of track
+        BoundingSphereData boundingSphere = pooledTrackScripts[trackID].totalBoundingSphere;
+        Vector3 offset = pooledTrackScripts[trackID].transform.position;
 
+        // loop over all active tracks
+        for (int i = 0; i < currentTracks.Count; i++)
+        {
+            // get the track ID of other track
+            int otherTrackID = currentTracks[i];
 
+            // if the track being checked is current track continue
+            if (otherTrackID == trackID) continue;
+
+            // get the bounding sphere and position of other track
+            BoundingSphereData otherBoundingSphere = pooledTrackScripts[otherTrackID].totalBoundingSphere;
+            Vector3 otherOffset = pooledTrackScripts[otherTrackID].transform.position;
+
+            // check if the bounding spheres overlap
+            bool overlap = CheckSphereOverlap(boundingSphere, offset, otherBoundingSphere, otherOffset);
+
+            // if no overlap continue the loop
+            if (!overlap) continue;
+
+            // if overlap check if the smaller bounding spheres overlap
+            overlap = CheckDetailedOverlap(trackID, otherTrackID);
+
+            // if overlapping return true
+            if (overlap) return true;
+        }
+
+        // if no overlap return false
         return false;
     }
 
+    private bool CheckDetailedOverlap(int trackID, int otherTrackID)
+    {
+        // get the list of detailed bounding spheres
+        List<BoundingSphereData> boundingSpheres = pooledTrackScripts[trackID].boundingSpheres;
+        List<BoundingSphereData> otherBoundingSpheres = pooledTrackScripts[otherTrackID].boundingSpheres;
+
+        // get the positions of tracks
+        Vector3 offset = pooledTrackScripts[trackID].transform.position;
+        Vector3 otherOffset = pooledTrackScripts[otherTrackID].transform.position;
+
+        // loop over bounding spheres in first list
+        for(int i = 0; i < boundingSpheres.Count; i++)
+        {
+            // loop over bounding spheres in second list
+            for(int j = 0; j < otherBoundingSpheres.Count; j++)
+            {
+                // check if the spheres intersect
+                bool overlap = CheckSphereOverlap(boundingSpheres[i], offset, otherBoundingSpheres[j], otherOffset);
+
+                // if overlap is detected return true
+                if (overlap) return true;
+            }
+        }
+
+        // if no overlap return false
+        return false;
+    }
+
+    private bool CheckSphereOverlap(BoundingSphereData sphereA, Vector3 offsetA, BoundingSphereData sphereB, Vector3 offsetB)
+    {
+        // get difference between the global positioned spheres
+        Vector3 difference = (sphereB.GetPosition() + offsetB) - (sphereA.GetPosition() + offsetA);
+        float distanceSquared = difference.sqrMagnitude;
+
+        float radiiSquared = (sphereA.GetRadius() + sphereB.GetRadius()) * (sphereA.GetRadius() + sphereB.GetRadius());
+
+        return (distanceSquared <= radiiSquared);
+    }
+
+
     private void ReleaseFirstTrack(int trackID)
     {
+        if(!currentTracks.Contains(trackID)) { return; }
+
         // index in the list of track collided with
         int collisionTrackIndex = currentTracks.IndexOf(trackID);
 
