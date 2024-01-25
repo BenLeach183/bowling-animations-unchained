@@ -11,17 +11,27 @@ public class PhysicsObjectsScript : MonoBehaviour
 
     Rigidbody rigidbody;
 
-    private void Start()
-    {
+    bool initialised = false;
+
+    void Start(){
+        Initialise();
+    }
+    public void Initialise(){
+        if(initialised) return;
+
         rigidbody = GetComponent<Rigidbody>();
         force = GetComponent<ConstantForce>();
-        force.force = transform.parent.rotation * Vector3.up * -9.8f;
+        force.force = transform.parent.up * -9.8f;
         BasePos = transform.localPosition;
         BaseRot = transform.rotation;
+        initialised = true;
+
     }
 
     public void Replace()
     {
+        if (!initialised) { Initialise(); }
+        force.force = transform.parent.up * -9.8f;
         rigidbody.velocity = Vector3.zero;
         transform.localPosition = BasePos;
         transform.rotation = BaseRot;

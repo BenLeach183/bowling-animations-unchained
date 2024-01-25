@@ -582,6 +582,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  updateRotation: 0
+  test: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &5936716934525460035
 GameObject:
   m_ObjectHideFlags: 0

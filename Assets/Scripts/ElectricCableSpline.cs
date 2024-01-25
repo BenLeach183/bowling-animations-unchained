@@ -11,8 +11,15 @@ public class ElectricCableSpline : MonoBehaviour
     int segments = 6;
     private List<Vector3> points = new List<Vector3>();
 
-    private void Start()
+    bool Initialised = false;
+
+    void Start(){
+        Initialise();
+    }
+
+    void Initialise()
     {
+        if (Initialised) return;
         lineRenderer = GetComponent<LineRenderer>();
         a = startPoint.position;
         c = endPoint.position;
@@ -24,14 +31,17 @@ public class ElectricCableSpline : MonoBehaviour
 
         lineRenderer.positionCount = segments + 1;
         lineRenderer.SetPositions(points.ToArray());
+        Initialised = true;
+
     }
 
     public void ReusedUpdate()
     {
+        if(!Initialised){Initialise();}
         //Debug.Log("test");
         lineRenderer = GetComponent<LineRenderer>();
-        a = startPoint.position + transform.root.position;
-        c = endPoint.position + transform.root.position;
+        a = startPoint.position;
+        c = endPoint.position;
 
         Vector3 droop = (a + ((c - a) / 2)) - (Vector3.up * (Vector3.Distance(a, c) / 10));
         b = droop;
