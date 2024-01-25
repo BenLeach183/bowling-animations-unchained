@@ -76,9 +76,9 @@ public class BezierPathGenerator : MonoBehaviour
         pointers = new List<GameObject>();
         mesh = new Mesh();
 
-        Vertices = new Vector3[(Segments + 1) * 2];//4];
+        Vertices = new Vector3[(Segments + 1) * 4];//4];
         UVs = new Vector2[(Segments + 1) * 2];//4];
-        Triangles = new int[(Segments) * 6];//12];
+        Triangles = new int[(Segments) * 24];//12];
 
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
@@ -107,17 +107,56 @@ public class BezierPathGenerator : MonoBehaviour
 
         for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
-            Vertices[i * 2] = (Positions[i] - (Rotations[i] * -Vector3.right * 3.5f));
-            Vertices[(i * 2) + 1] = (Positions[i] - (Rotations[i] * Vector3.right * 3.5f));
+            Vector3 left = (Positions[i] - (Rotations[i] * Vector3.left * 3.5f));
+            Vector3 right = (Positions[i] - (Rotations[i] * Vector3.right * 3.5f));
+
+            Vector3 down = ((Rotations[i] * Vector3.down * 0.18f));
+            Vector3 up = ((Rotations[i] * Vector3.up * 0.18f));
+
+            Vertices[i * 4] = left + up;
+            Vertices[(i * 4) + 1] = right + up;
+
+            Vertices[(i * 4) + 2] = left + down;
+            Vertices[(i * 4) + 3] = right + down;
 
             if (i < Segments)
             {
-                Triangles[(i * 6)] = (i * 2);
-                Triangles[(i * 6) + 1] = (i * 2) + 1;
-                Triangles[(i * 6) + 2] = (i * 2) + 2;
-                Triangles[(i * 6) + 3] = (i * 2) + 1;
-                Triangles[(i * 6) + 4] = (i * 2) + 3;
-                Triangles[(i * 6) + 5] = (i * 2) + 2;
+                // top
+                Triangles[(i * 24)] = (i * 4);
+                Triangles[(i * 24) + 1] = (i * 4) + 1;
+                Triangles[(i * 24) + 2] = ((i+1) * 4);
+
+                Triangles[(i * 24) + 3] = (i * 4) + 1;
+                Triangles[(i * 24) + 4] = ((i+1) * 4) + 1;
+                Triangles[(i * 24) + 5] = ((i+1) * 4);
+
+                // bottom
+                Triangles[(i * 24) + 6] = (i * 4) + 2;
+                Triangles[(i * 24) + 8] = (i * 4) + 3;
+                Triangles[(i * 24) + 7] = ((i + 1) * 4) + 2;
+
+                Triangles[(i * 24) + 9] = (i * 4) + 3;
+                Triangles[(i * 24) + 11] = ((i + 1) * 4) + 3;
+                Triangles[(i * 24) + 10] = ((i + 1) * 4) + 2;
+
+                // left
+                Triangles[(i * 24) + 12] = (i * 4) + 2;
+                Triangles[(i * 24) + 13] = (i * 4);
+                Triangles[(i * 24) + 14] = ((i + 1) * 4);
+
+                Triangles[(i * 24) + 15] = (i * 4) + 2;
+                Triangles[(i * 24) + 16] = ((i + 1) * 4);
+                Triangles[(i * 24) + 17] = ((i + 1) * 4) + 2;
+
+                // right
+                Triangles[(i * 24) + 18] = (i * 4) + 3;
+                Triangles[(i * 24) + 20] = (i * 4) + 1;
+                Triangles[(i * 24) + 19] = ((i + 1) * 4) + 1;
+
+                Triangles[(i * 24) + 21] = (i * 4) + 3;
+                Triangles[(i * 24) + 23] = ((i + 1) * 4) + 1;
+                Triangles[(i * 24) + 22] = ((i + 1) * 4) + 3;
+
             }
         }
         mesh.vertices = Vertices;
