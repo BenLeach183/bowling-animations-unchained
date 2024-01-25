@@ -9,17 +9,21 @@ public class PhysicsObjectsScript : MonoBehaviour
     Vector3 BasePos;
     Quaternion BaseRot;
 
+    Rigidbody rigidbody;
+
     private void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
         force = GetComponent<ConstantForce>();
-        force.force = transform.rotation * Vector3.forward * -9.8f;
-        BasePos = transform.position;
+        force.force = transform.parent.rotation * Vector3.up * -9.8f;
+        BasePos = transform.localPosition;
         BaseRot = transform.rotation;
     }
 
     public void Replace()
     {
-        transform.position = BasePos;
+        rigidbody.velocity = Vector3.zero;
+        transform.localPosition = BasePos;
         transform.rotation = BaseRot;
     }
 }
