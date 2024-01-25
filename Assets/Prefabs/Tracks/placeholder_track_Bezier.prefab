@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalBoundingSphere:
-    position: {x: 0, y: 6.25, z: 0}
-    radius: 17.6
+    position: {x: -5.54, y: 15, z: 11.23}
+    radius: 31.4
   boundingSpheres: []
   connected: 0
   trackEnabled: 0
@@ -103,6 +103,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  updateRotation: 0
+  test: {x: 0, y: 0, z: 0, w: 1}
 --- !u!65 &3816009873671225281
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -122,8 +124,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1367505, y: 60.75017, z: 1.5196425}
-  m_Center: {x: 0.07837422, y: 27.125084, z: -0.20981728}
+  m_Size: {x: 14.69, y: 10, z: 10}
+  m_Center: {x: 0.43, y: 5.74, z: 6}
 --- !u!1 &5936716934525460035
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +184,10 @@ PrefabInstance:
     - target: {fileID: 871884118283180752, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734248399585098389, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 38.98
       objectReference: {fileID: 0}
     - target: {fileID: 2066273415113776042, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -289,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6414508371608443241, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_Center.z
-      value: 0.23585488
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 6441913367642981186, guid: d2fe7f62607b47640ab97a029e269bec, type: 3}
       propertyPath: m_IsActive

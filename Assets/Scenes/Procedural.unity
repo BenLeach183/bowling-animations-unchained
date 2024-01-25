@@ -358,12 +358,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBackTrackLength: 1
-  maxForwardTrackLength: 8
+  maxForwardTrackLength: 3
   proceduralElements:
   - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
   - {fileID: 8410289366016849012, guid: da870f05c752bd6428384e094c5f8ccb, type: 3}
-  - {fileID: 4223131677537799814, guid: 01fa1accb49f07c46bf334edf72e952b, type: 3}
   - {fileID: 3355977644945302993, guid: 25e8f9a7380743745acb88c2c03dbd2d, type: 3}
+  - {fileID: 4223131677537799814, guid: 01fa1accb49f07c46bf334edf72e952b, type: 3}
   - {fileID: 3372956647528424646, guid: 62d4eaaba32bcba4ebc5c06893b8f8e8, type: 3}
   - {fileID: 5168598522632732280, guid: f6771e1326e91544facb92aee33c8d5a, type: 3}
 --- !u!4 &845936584

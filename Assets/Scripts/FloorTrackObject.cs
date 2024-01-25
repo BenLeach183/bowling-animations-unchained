@@ -45,6 +45,10 @@ public class FloorTrackObject : MonoBehaviour
 
     public UnityEvent trackAdded;
 
+    public bool updateRotation;
+    public Quaternion test = Quaternion.identity;
+    private Quaternion testPrev = Quaternion.identity;
+
     // update the default values
     public void Awake()
     {
@@ -72,6 +76,35 @@ public class FloorTrackObject : MonoBehaviour
         {
             boundingSpheres[index].SetPosition(position);
             boundingSpheres[index].SetRadius(radius);
+        }
+    }
+
+    public void ClearBoundingSpheres()
+    {
+        boundingSpheres.Clear();
+    }
+
+    public void Update()
+    {
+        if(updateRotation)
+        {
+            totalBoundingSphere.Rotate(Quaternion.Inverse(testPrev));
+            for (int i = 0; i < boundingSpheres.Count; i++)
+            {
+                boundingSpheres[i].Rotate(Quaternion.Inverse(testPrev));
+            }
+
+            totalBoundingSphere.Rotate(test);
+            for (int i = 0; i < boundingSpheres.Count; i++)
+            {
+                boundingSpheres[i].Rotate(test);
+            }
+
+            testPrev = test;
+
+            this.transform.rotation = test;
+
+            updateRotation = false;
         }
     }
 
@@ -147,6 +180,9 @@ public class FloorTrackObject : MonoBehaviour
     {
         trackEnabled = true;
         this.gameObject.SetActive(true);
+
+        // invoke the track added event
+        trackAdded.Invoke();
     }
 
     public void Despawn()
