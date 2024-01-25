@@ -26,6 +26,21 @@ public class ElectricCableSpline : MonoBehaviour
         lineRenderer.SetPositions(points.ToArray());
     }
 
+    public void ReusedUpdate()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        a = startPoint.position;
+        c = endPoint.position;
+
+        Vector3 droop = (a + ((c - a) / 2)) - (Vector3.up * (Vector3.Distance(a, c) / 10));
+        b = droop;
+
+        RasterizeBezier();
+
+        lineRenderer.positionCount = segments + 1;
+        lineRenderer.SetPositions(points.ToArray());
+    }
+
     private void RasterizeBezier()
     {
         for (int i = 0; i <= segments; i++)

@@ -71,6 +71,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af8e6152fcb0064eaf086a85f655e6f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3950635868250599144}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af8e6152fcb0064eaf086a85f655e6f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9092941208130708407}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af8e6152fcb0064eaf086a85f655e6f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2456399798952571074}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4af8e6152fcb0064eaf086a85f655e6f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 290213885898588026}
   m_SourcePrefab: {fileID: 100100000, guid: 4af8e6152fcb0064eaf086a85f655e6f, type: 3}
 --- !u!1 &8745072784234817800 stripped
 GameObject:
@@ -98,3 +107,54 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.01
   m_Center: {x: 0.000000006643063, y: 0.00091940217, z: -0.0074634925}
+--- !u!54 &9092941208130708407
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745072784234817800}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!75 &-2456399798952571074
+ConstantForce:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745072784234817800}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &290213885898588026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745072784234817800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5239526f8ac82cf43840db57322db18f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
