@@ -10,6 +10,12 @@ public class BezierPathGenerator : MonoBehaviour
     public TurningVolumeScript turningVolumeScript;
     public GameObject pointer;
     public GameObject platform;
+
+    [SerializeField]
+    private MeshFilter meshFilter;
+    [SerializeField]
+    private MeshCollider meshCollider;
+
     Vector3 a, b, c, d;
 
     Vector3 CurrentGameUp;
@@ -24,7 +30,7 @@ public class BezierPathGenerator : MonoBehaviour
 
     Mesh mesh;
 
-
+    public bool initalised = false;
 
     Vector3[] Vertices;
     Vector2[] UVs;
@@ -32,6 +38,13 @@ public class BezierPathGenerator : MonoBehaviour
 
     void Awake()
     {
+        ReuseUpdate();
+    }
+
+    private void Initialise()
+    {
+        if (initalised) return;
+
         // initialize variables
         pointers = new List<GameObject>();
         mesh = new Mesh();
@@ -39,42 +52,28 @@ public class BezierPathGenerator : MonoBehaviour
         Vertices = new Vector3[(Segments + 1) * 2];//4];
         UVs = new Vector2[(Segments + 1) * 2];//4];
         Triangles = new int[(Segments) * 6];//12];
-        //platforms = new List<GameObject>();
 
-        
-
-        a = Point1.transform.position;
-        b = Point2.transform.position;
-        c = Point3.transform.position;
-        d = Point4.transform.position;
-
-        c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
-
-        RasterizeBezier();
-        UpdateMesh();
-        UpdateConstrictionPoints();
-
-        GetComponent<MeshFilter>().mesh = mesh;
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
 
         for (int i = 0; i <= Segments; i++)
         {
-            //platforms.Add(Instantiate(platform, Positions[i], Rotations[i]));
-            pointers.Add(Instantiate(pointer, Positions[i] + ((Rotations[i] * Vector3.up) / 10), Rotations[i]));
+            pointers.Add(Instantiate(pointer, Vector3.zero, Quaternion.identity));
             turningVolumeScript.PlayerMarkers.Add(pointers[i].transform);
-            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
         }
-        
 
 
+        initalised = false;
     }
 
     public void ReuseUpdate()
     {
-        a = Point1.transform.position;
-        b = Point2.transform.position;
-        c = Point3.transform.position;
-        d = Point4.transform.position;
+        if (!initalised) { Initialise(); }
+
+        a = Point1.transform.localPosition;
+        b = Point2.transform.localPosition;
+        c = Point3.transform.localPosition;
+        d = Point4.transform.localPosition;
 
         c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
@@ -85,13 +84,14 @@ public class BezierPathGenerator : MonoBehaviour
         {
             pointers[i].transform.position = Positions[i] + ((Rotations[i] * Vector3.up) / 10);
             pointers[i].transform.rotation = Rotations[i];
-            floorTrackObject.UpdateBoundingSpheres((Positions[i] - transform.position), 2.0f,i);
+            floorTrackObject.UpdateBoundingSpheres((Positions[i]), 0.5f,i);
         }
-        
     }
+
     void UpdateConstrictionPoints()
     {
         floorTrackObject.UpdateEndPoint(Rotations[Rotations.Count - 1], Positions[Positions.Count - 1]);
+        floorTrackObject.UpdateStartPoint(Rotations[0], Positions[0]); 
     }
 
     void UpdateMesh()
@@ -100,8 +100,8 @@ public class BezierPathGenerator : MonoBehaviour
 
         for (int i = 0; i <= Segments; i++)// * 2; i++)
         {
-            Vertices[i * 2] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * -Vector3.right * 3));
-            Vertices[(i * 2) + 1] = transform.parent.worldToLocalMatrix * ((Positions[i] - transform.position) - (Rotations[i] * Vector3.right * 3));
+            Vertices[i * 2] = (Positions[i] - (Rotations[i] * -Vector3.right * 3.5f));
+            Vertices[(i * 2) + 1] = (Positions[i] - (Rotations[i] * Vector3.right * 3.5f));
 
             if (i < Segments)
             {
@@ -121,6 +121,9 @@ public class BezierPathGenerator : MonoBehaviour
     {
         Positions = new List<Vector3>();
         Rotations = new List<Quaternion>();
+
+        Rotations.Add(Quaternion.identity);
+
         for (int i = 0; i <= Segments; i++)
         {
             Positions.Add(GetValue((float)i / Segments));
@@ -128,10 +131,11 @@ public class BezierPathGenerator : MonoBehaviour
             {
                 Rotations.Add(Quaternion.LookRotation((Positions[i] - Positions[i - 1]).normalized, Rotations[i - 1] * Vector3.up));
             }
-            else
-            {
-                Rotations.Add(Point1.transform.parent.rotation);
-            }
+        }
+        
+        if(Segments >= 1)
+        {
+            Rotations[0] = Quaternion.LookRotation((Positions[1] - Positions[0]).normalized, Rotations[0] * Vector3.up);
         }
     }
 

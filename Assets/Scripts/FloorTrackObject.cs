@@ -79,6 +79,9 @@ public class FloorTrackObject : MonoBehaviour
     {
         localStartPos = position;
         localStartRot = rotation;
+
+        transform.Find("procedural_start").localPosition = position;
+        transform.Find("procedural_start").localRotation = rotation;
     }
 
     public void UpdateEndPoint(Quaternion rotation, Vector3 position)
@@ -86,8 +89,9 @@ public class FloorTrackObject : MonoBehaviour
         localEndPos = position;
         localEndRot = rotation;
 
-        endPos = localEndPos;
-        endRot = localEndRot;
+
+        transform.Find("procedural_end").localPosition = position;
+        transform.Find("procedural_end").localRotation = rotation;
     }
 
     public bool ConnectToPoint(Vector3 position, Quaternion rotation)
@@ -99,6 +103,9 @@ public class FloorTrackObject : MonoBehaviour
         {
             boundingSpheres[i].Rotate(inverseCurrent);
         }
+
+        // invoke the track added event
+        trackAdded.Invoke();
 
         // find the rotation ( multiplying by inverse subtracts rotation)
         Quaternion rotateTo = rotation * Quaternion.Inverse(localStartRot);
@@ -130,8 +137,7 @@ public class FloorTrackObject : MonoBehaviour
         this.gameObject.SetActive(true);
         trackEnabled = true;
 
-        // invoke the track added event
-        trackAdded.Invoke();
+
 
         // return true if succesful
         return true;
