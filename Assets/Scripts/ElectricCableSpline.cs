@@ -28,9 +28,10 @@ public class ElectricCableSpline : MonoBehaviour
 
     public void ReusedUpdate()
     {
+        //Debug.Log("test");
         lineRenderer = GetComponent<LineRenderer>();
-        a = startPoint.position;
-        c = endPoint.position;
+        a = startPoint.position + transform.root.position;
+        c = endPoint.position + transform.root.position;
 
         Vector3 droop = (a + ((c - a) / 2)) - (Vector3.up * (Vector3.Distance(a, c) / 10));
         b = droop;
