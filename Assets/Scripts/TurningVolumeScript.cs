@@ -7,12 +7,12 @@ public class TurningVolumeScript : MonoBehaviour
 {
     public List<Transform> PlayerMarkers, CameraMarkers;
     GameObject Player;
-    Vector3 TargetDirection = Vector3.forward,TargetUpDirection = Vector3.up;
+    Vector3 TargetDirection = Vector3.forward, TargetUpDirection = Vector3.up;
     int LastClosest = 0, NextClosest = 0;
     float BaseSpeed = 1;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
             Player = other.gameObject;
             BaseSpeed = Player.GetComponent<PlayerController>().MaxSpeed;
@@ -130,10 +130,14 @@ public class TurningVolumeScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Player.GetComponent<PlayerController>().speed = BaseSpeed;
-        Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[PlayerMarkers.Count - 1].forward;
-        Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[PlayerMarkers.Count - 1].up;
+        if (other.transform.tag == "Player")
+        {
+            Player.GetComponent<PlayerController>().speed = BaseSpeed;
+            Player.GetComponent<PlayerController>().TargetMoveDirection = PlayerMarkers[PlayerMarkers.Count - 1].forward;
+            Player.GetComponent<PlayerController>().TargetUpDirection = PlayerMarkers[PlayerMarkers.Count - 1].up;
+        }
+
     }
 
-    
+
 }

@@ -4899,7 +4899,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d3daac5a4eaf0274e8a904f44da0c046, type: 2}
     - target: {fileID: 919132149155446097, guid: a558de316c691d049a29a8064a74f334, type: 3}
       propertyPath: m_Name
-      value: Crate Variant
+      value: Crate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4939,7 +4939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 0.5
   pushPlayerBack: 1
-  pushBackForce: -500
+  pushBackForce: -100
 --- !u!65 &338580308857521822
 BoxCollider:
   m_ObjectHideFlags: 0

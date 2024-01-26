@@ -33,8 +33,8 @@ public class BezierPathGenerator : MonoBehaviour
 
     private bool initalised = false;
 
-    private float width = 7.0f;
-    private float depth = 0.34f;
+    private float width = 5.0f;
+    private float depth = 1.0f;
 
     private Vector3 minimumVertex;
     private Vector3 maximumVertex;
