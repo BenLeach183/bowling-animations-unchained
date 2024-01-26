@@ -224,11 +224,11 @@ public class ProceduralGeneration : MonoBehaviour
     {
         int index = currentTracks.IndexOf(trackID);
 
-        // enable turning volume for this track
-        pooledTrackScripts[currentTracks[index]].TurningVolumeActive(true);
-
         // if the track collider being entered isn't the next track, ignore
         if (index > maxBackTrackLength+1) return;
+
+        // enable turning volume for this track
+        pooledTrackScripts[currentTracks[index]].TurningVolumeActive(true);
 
         // if it is, enable the turning volume for the next track
         if (currentTracks.Count > index+1)

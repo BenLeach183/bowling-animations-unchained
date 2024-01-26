@@ -549,7 +549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2665315285399123840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 1, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -660,12 +660,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 8.113502, y: 9.923551, z: 24.818525}
+  m_Center: {x: 2.3633575, y: 4.4617753, z: 6.0522337}
 --- !u!114 &8105901780365224059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b8811159b4849418dbb4dbc16993f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turningVolumes: {fileID: 0}
+  turningVolumes: {fileID: 7615878639789670865}
   totalBoundingSphere:
     position: {x: 0, y: 1.83, z: 5.69}
     radius: 14.58
@@ -1115,6 +1115,11 @@ Transform:
 --- !u!65 &4927992536516824551 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: -3627956839319118947, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+  m_PrefabInstance: {fileID: 704065002708129402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7615878639789670865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6950283644121765803, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
   m_PrefabInstance: {fileID: 704065002708129402}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &911004334865123864
