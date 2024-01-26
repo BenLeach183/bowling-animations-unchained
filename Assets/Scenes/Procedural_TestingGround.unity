@@ -359,6 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBackTrackLength: 1
   maxForwardTrackLength: 8
+  spawnTrack: {fileID: 9094366827769007049, guid: c8cb439e241aae6488683eb3250f0c60, type: 3}
   proceduralElements:
   - {fileID: 7176038302334939369, guid: bcd15a8dd9880be4b98d95a40bf33446, type: 3}
   - {fileID: 9155235612107483981, guid: 8bb35360561d4fa4db95300cc6150ba8, type: 3}
@@ -498,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9109985303210587680, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9109985303210587680, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_LocalPosition.z
