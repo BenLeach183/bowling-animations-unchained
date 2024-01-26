@@ -264,6 +264,14 @@ PrefabInstance:
       value: placeholder_Reverse
       objectReference: {fileID: 0}
     - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: turningVolume
+      value: 
+      objectReference: {fileID: 4329554657525792096}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+      propertyPath: turningVolumes
+      value: 
+      objectReference: {fileID: 1281024892041228630}
+    - target: {fileID: 8105901780365224059, guid: 56af56506d09b774086de03a0ed70570, type: 3}
       propertyPath: boundingSpheres.Array.size
       value: 12
       objectReference: {fileID: 0}
@@ -573,6 +581,16 @@ PrefabInstance:
       addedObject: {fileID: 2062661131293629992}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+--- !u!1 &1281024892041228630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6950283644121765803, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+  m_PrefabInstance: {fileID: 8192966348424947453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4329554657525792096 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: -3627956839319118947, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+  m_PrefabInstance: {fileID: 8192966348424947453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5143568010350460732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3950462432196516289, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}

@@ -13,12 +13,20 @@ using UnityEngine.Events;
 public class FloorTrackObject : MonoBehaviour
 {
     [SerializeField]
+    GameObject turningVolumes;
+
+    [SerializeField]
     // one sphere that covers the entire object (for optimization)
     public BoundingSphereData totalBoundingSphere = new BoundingSphereData();
 
     // array if smaller spheres to detect if track collides with nearby tracks within bigger sphere
     [SerializeField]
     public List<BoundingSphereData> boundingSpheres;
+
+    [SerializeField]
+    BoxCollider turningVolumeCollider;
+    [SerializeField]
+    BoxCollider trackEnterCollider;
 
     // whether the track has been connected to the next track
     public bool connected = false;
@@ -44,10 +52,6 @@ public class FloorTrackObject : MonoBehaviour
     private Quaternion currentRotation = Quaternion.identity;
 
     public UnityEvent trackAdded;
-
-    public bool updateRotation;
-    public Quaternion test = Quaternion.identity;
-    private Quaternion testPrev = Quaternion.identity;
 
     // update the default values
     public void Awake()
@@ -84,30 +88,6 @@ public class FloorTrackObject : MonoBehaviour
         boundingSpheres.Clear();
     }
 
-    public void Update()
-    {
-        if(updateRotation)
-        {
-            totalBoundingSphere.Rotate(Quaternion.Inverse(testPrev));
-            for (int i = 0; i < boundingSpheres.Count; i++)
-            {
-                boundingSpheres[i].Rotate(Quaternion.Inverse(testPrev));
-            }
-
-            totalBoundingSphere.Rotate(test);
-            for (int i = 0; i < boundingSpheres.Count; i++)
-            {
-                boundingSpheres[i].Rotate(test);
-            }
-
-            testPrev = test;
-
-            this.transform.rotation = test;
-
-            updateRotation = false;
-        }
-    }
-
     public void UpdateStartPoint(Quaternion rotation, Vector3 position)
     {
         localStartPos = position;
@@ -125,6 +105,21 @@ public class FloorTrackObject : MonoBehaviour
 
         transform.Find("procedural_end").localPosition = position;
         transform.Find("procedural_end").localRotation = rotation;
+    }
+
+    public void UpdateBoundary(Vector3 min, Vector3 max)
+    {
+        Vector3 center = (min + max) / 2;
+        float distFromCenter = Vector3.Distance(center, min);
+
+        totalBoundingSphere.SetPosition(center);
+        totalBoundingSphere.SetRadius(distFromCenter);
+
+        turningVolumeCollider.center = center;
+        turningVolumeCollider.size = max - min;
+
+        trackEnterCollider.center = center;
+        trackEnterCollider.size = max - min;
     }
 
     public bool ConnectToPoint(Vector3 position, Quaternion rotation)
@@ -174,6 +169,14 @@ public class FloorTrackObject : MonoBehaviour
 
         // return true if succesful
         return true;
+    }
+
+    public void TurningVolumeActive(bool active)
+    {
+        if(turningVolumes)
+        {
+            turningVolumes.SetActive(active);
+        }
     }
 
     public void EnableTrack()

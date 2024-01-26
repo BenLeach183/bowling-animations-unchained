@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BezierPathGenerator : MonoBehaviour
@@ -35,25 +36,34 @@ public class BezierPathGenerator : MonoBehaviour
     private float width = 7.0f;
     private float depth = 0.34f;
 
+    private Vector3 minimumVertex;
+    private Vector3 maximumVertex;
+
     Vector3[] Vertices;
     Vector2[] UVs;
     int[] Triangles;
 
     public void ReuseUpdate()
     {
+        // intialise this class if it hasnt been already
         if (!initalised) { Initialise(); }
 
+        // get the position of the points used for bezier curve
         a = Point1.transform.localPosition;
         b = Point2.transform.localPosition;
         c = Point3.transform.localPosition;
         d = Point4.transform.localPosition;
 
+        // add a random position to the c point
         c = c + (Vector3.right * Random.Range(-3, 3)) + (Vector3.up * Random.Range(-3, 3)) + (Vector3.forward * Random.Range(-3, 3));
 
+        // update the bezier track
         RasterizeBezier();
         UpdateMesh();
         UpdateConstrictionPoints();
+        floorTrackObject.UpdateBoundary(minimumVertex, maximumVertex);
 
+        // update the bounding spheres (used for detecting track overlap)
         int boundaryIndex = 0;
         floorTrackObject.ClearBoundingSpheres();
 
@@ -104,6 +114,21 @@ public class BezierPathGenerator : MonoBehaviour
         floorTrackObject.UpdateStartPoint(Rotations[0], Positions[0]); 
     }
 
+    // find the bounding corners of the track
+    void UpdateMinMaxBounds(Vector3 left, Vector3 right, Vector3 down, Vector3 up)
+    {
+        float minX = Mathf.Min(minimumVertex.x, left.x, right.x, down.x, up.x);
+        float minY = Mathf.Min(minimumVertex.y, left.y, right.y, down.y, up.y);
+        float minZ = Mathf.Min(minimumVertex.z, left.z, right.z, down.z, up.z);
+
+        float maxX = Mathf.Max(maximumVertex.x, left.x, right.x, down.x, up.x);
+        float maxY = Mathf.Max(maximumVertex.y, left.y, right.y, down.y, up.y);
+        float maxZ = Mathf.Max(maximumVertex.z, left.z, right.z, down.z, up.z);
+
+        minimumVertex = new Vector3(minX, minY, minZ);
+        maximumVertex = new Vector3(maxX, maxY, maxZ); 
+    }
+
     void UpdateMesh()
     {
         mesh.Clear();
@@ -114,6 +139,11 @@ public class BezierPathGenerator : MonoBehaviour
 
         Vector3 down = ((Rotations[0] * Vector3.down * depth/2));
         Vector3 up = ((Rotations[0] * Vector3.up * depth / 2));
+
+        // update the bounds
+        minimumVertex = left;
+        maximumVertex = left;
+        UpdateMinMaxBounds(left, right, down, up);
 
         for (int i = 0; i < Segments; i++)
         {
@@ -138,6 +168,9 @@ public class BezierPathGenerator : MonoBehaviour
 
             down = ((Rotations[i + 1] * Vector3.down * depth / 2));
             up = ((Rotations[i + 1] * Vector3.up * depth / 2));
+
+            // update the bounds
+            UpdateMinMaxBounds(left, right, down, up);
 
             // generate platform vertices for the next point
             Vertices[vertexIndex + 8] = left + up;  //

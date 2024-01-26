@@ -102,6 +102,12 @@ public class ProceduralGeneration : MonoBehaviour
             return;
         }
 
+        // if track is further ahead than 1 disable turning volume
+        if(currentTracks.Count >= maxBackTrackLength + 1)
+        {
+            pooledTrackScripts[trackID].TurningVolumeActive(false);
+        }
+
         // remove the track from available and add to current
         availableTracks.Remove(trackID);
         currentTracks.Add(trackID);
@@ -216,6 +222,20 @@ public class ProceduralGeneration : MonoBehaviour
 
     public void CollidedWithTrack(int trackID)
     {
+        int index = currentTracks.IndexOf(trackID);
+
+        // enable turning volume for this track
+        pooledTrackScripts[currentTracks[index]].TurningVolumeActive(true);
+
+        // if the track collider being entered isn't the next track, ignore
+        if (index > maxBackTrackLength+1) return;
+
+        // if it is, enable the turning volume for the next track
+        if (currentTracks.Count > index+1)
+        {
+            pooledTrackScripts[currentTracks[index + 1]].TurningVolumeActive(true);
+        }
+
         ReleaseFirstTrack(trackID);
         AddTrack();
     }

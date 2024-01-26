@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b8811159b4849418dbb4dbc16993f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turningVolumes: {fileID: 729030327072235121}
   totalBoundingSphere:
     position: {x: 0.08, y: 0, z: -3.77}
     radius: 10.4
@@ -165,11 +166,16 @@ MonoBehaviour:
     radius: 3
   - position: {x: -0.85, y: 0, z: -7.55}
     radius: 3
+  turningVolumeCollider: {fileID: 0}
+  trackEnterCollider: {fileID: 0}
   connected: 0
   trackEnabled: 0
   trackID: 0
   endPos: {x: 0, y: 0, z: 0}
   endRot: {x: 0, y: 0, z: 0, w: 0}
+  trackAdded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &8857380768563511410
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -513,6 +519,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+--- !u!1 &729030327072235121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6950283644121765803, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
+  m_PrefabInstance: {fileID: 7668037102914062810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5424784190186150750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2387720773587833476, guid: 573d5fcbb7aab2c4da55032361650feb, type: 3}
