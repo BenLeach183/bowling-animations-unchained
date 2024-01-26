@@ -27,7 +27,5 @@ public class consistentFOV : MonoBehaviour
     private void Update()
     {
         AdjustFOV();    //This is on update for debug purposes REMOVE THIS after testing
-
-        Debug.Log(mainCamera.fieldOfView);
     }
 }

@@ -17,7 +17,7 @@ public class ProceduralGeneration : MonoBehaviour
 
     // pooled track objects and script references
     private GameObject[] pooledTracks;
-    private FloorTrackObject[] pooledTrackScripts;
+    public FloorTrackObject[] pooledTrackScripts;
 
     // number of pooled objects for each type
     private byte numPooledObject = 3;

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float MaxSpeed;
 
     bool firstInput = true;
+    public bool onTrack = true;
 
     Vector2 InputVector = Vector2.zero;
 
@@ -78,5 +79,15 @@ public class PlayerController : MonoBehaviour
         else{
             firstInput = true;
         }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        onTrack = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        onTrack = false;
     }
 }
