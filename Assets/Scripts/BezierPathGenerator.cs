@@ -30,7 +30,10 @@ public class BezierPathGenerator : MonoBehaviour
 
     Mesh mesh;
 
-    public bool initalised = false;
+    private bool initalised = false;
+
+    private float width = 7.0f;
+    private float depth = 0.34f;
 
     Vector3[] Vertices;
     Vector2[] UVs;
@@ -76,7 +79,7 @@ public class BezierPathGenerator : MonoBehaviour
         pointers = new List<GameObject>();
         mesh = new Mesh();
 
-        Vertices = new Vector3[(Segments + 1) * 4];//4];
+        Vertices = new Vector3[(Segments + 1) * 16];//4];
         UVs = new Vector2[(Segments + 1) * 2];//4];
         Triangles = new int[(Segments) * 24];//12];
 
@@ -105,62 +108,90 @@ public class BezierPathGenerator : MonoBehaviour
     {
         mesh.Clear();
 
-        for (int i = 0; i <= Segments; i++)// * 2; i++)
+        // get the platform vertices of the first point
+        Vector3 left = (Positions[0] - (Rotations[0] * Vector3.left * width/2));
+        Vector3 right = (Positions[0] - (Rotations[0] * Vector3.right * width/2));
+
+        Vector3 down = ((Rotations[0] * Vector3.down * depth/2));
+        Vector3 up = ((Rotations[0] * Vector3.up * depth / 2));
+
+        for (int i = 0; i < Segments; i++)
         {
-            Vector3 left = (Positions[i] - (Rotations[i] * Vector3.left * 3.5f));
-            Vector3 right = (Positions[i] - (Rotations[i] * Vector3.right * 3.5f));
+            int vertexIndex = i * 16;
 
-            Vector3 down = ((Rotations[i] * Vector3.down * 0.18f));
-            Vector3 up = ((Rotations[i] * Vector3.up * 0.18f));
+            // generate platform vertices for current point
+            Vertices[vertexIndex] = left + up;  //
+            Vertices[vertexIndex + 1] = right + up; //
 
-            Vertices[i * 4] = left + up;
-            Vertices[(i * 4) + 1] = right + up;
+            Vertices[vertexIndex + 2] = left + down;    //
+            Vertices[vertexIndex + 3] = right + down;   //
 
-            Vertices[(i * 4) + 2] = left + down;
-            Vertices[(i * 4) + 3] = right + down;
+            Vertices[vertexIndex + 4] = left + up;  //
+            Vertices[vertexIndex + 5] = right + up;
 
-            if (i < Segments)
-            {
-                // top
-                Triangles[(i * 24)] = (i * 4);
-                Triangles[(i * 24) + 1] = (i * 4) + 1;
-                Triangles[(i * 24) + 2] = ((i+1) * 4);
+            Vertices[vertexIndex + 6] = left + down;    //
+            Vertices[vertexIndex + 7] = right + down;
 
-                Triangles[(i * 24) + 3] = (i * 4) + 1;
-                Triangles[(i * 24) + 4] = ((i+1) * 4) + 1;
-                Triangles[(i * 24) + 5] = ((i+1) * 4);
+            // get the platform vertices of the next point
+            left = (Positions[i+1] - (Rotations[i + 1] * Vector3.left * width / 2));
+            right = (Positions[i + 1] - (Rotations[i + 1] * Vector3.right * width / 2));
 
-                // bottom
-                Triangles[(i * 24) + 6] = (i * 4) + 2;
-                Triangles[(i * 24) + 8] = (i * 4) + 3;
-                Triangles[(i * 24) + 7] = ((i + 1) * 4) + 2;
+            down = ((Rotations[i + 1] * Vector3.down * depth / 2));
+            up = ((Rotations[i + 1] * Vector3.up * depth / 2));
 
-                Triangles[(i * 24) + 9] = (i * 4) + 3;
-                Triangles[(i * 24) + 11] = ((i + 1) * 4) + 3;
-                Triangles[(i * 24) + 10] = ((i + 1) * 4) + 2;
+            // generate platform vertices for the next point
+            Vertices[vertexIndex + 8] = left + up;  //
+            Vertices[vertexIndex + 9] = right + up; //
 
-                // left
-                Triangles[(i * 24) + 12] = (i * 4) + 2;
-                Triangles[(i * 24) + 13] = (i * 4);
-                Triangles[(i * 24) + 14] = ((i + 1) * 4);
+            Vertices[vertexIndex + 10] = left + down;   //
+            Vertices[vertexIndex + 11] = right + down;  //
 
-                Triangles[(i * 24) + 15] = (i * 4) + 2;
-                Triangles[(i * 24) + 16] = ((i + 1) * 4);
-                Triangles[(i * 24) + 17] = ((i + 1) * 4) + 2;
+            Vertices[vertexIndex + 12] = left + up; //
+            Vertices[vertexIndex + 13] = right + up;
 
-                // right
-                Triangles[(i * 24) + 18] = (i * 4) + 3;
-                Triangles[(i * 24) + 20] = (i * 4) + 1;
-                Triangles[(i * 24) + 19] = ((i + 1) * 4) + 1;
+            Vertices[vertexIndex + 14] = left + down;
+            Vertices[vertexIndex + 15] = right + down;
 
-                Triangles[(i * 24) + 21] = (i * 4) + 3;
-                Triangles[(i * 24) + 23] = ((i + 1) * 4) + 1;
-                Triangles[(i * 24) + 22] = ((i + 1) * 4) + 3;
+            // create triangles
+            // top
+            Triangles[(i * 24)] = vertexIndex;
+            Triangles[(i * 24) + 1] = vertexIndex + 1;
+            Triangles[(i * 24) + 2] = vertexIndex + 8;
 
-            }
+            Triangles[(i * 24) + 3] = vertexIndex + 1;
+            Triangles[(i * 24) + 4] = vertexIndex + 9;
+            Triangles[(i * 24) + 5] = vertexIndex + 8;
+
+            // bottom
+            Triangles[(i * 24) + 6] = vertexIndex + 2;
+            Triangles[(i * 24) + 8] = vertexIndex + 3;
+            Triangles[(i * 24) + 7] = vertexIndex + 10;
+
+            Triangles[(i * 24) + 9] = vertexIndex + 3;
+            Triangles[(i * 24) + 11] = vertexIndex + 11;
+            Triangles[(i * 24) + 10] = vertexIndex + 10;
+
+            // left
+            Triangles[(i * 24) + 12] = vertexIndex + 6;
+            Triangles[(i * 24) + 13] = vertexIndex + 4;
+            Triangles[(i * 24) + 14] = vertexIndex + 12;
+
+            Triangles[(i * 24) + 15] = vertexIndex + 6;
+            Triangles[(i * 24) + 16] = vertexIndex + 12;
+            Triangles[(i * 24) + 17] = vertexIndex + 14;
+
+            // right
+            Triangles[(i * 24) + 18] = vertexIndex + 7;
+            Triangles[(i * 24) + 20] = vertexIndex + 5;
+            Triangles[(i * 24) + 19] = vertexIndex + 13;
+
+            Triangles[(i * 24) + 21] = vertexIndex + 7;
+            Triangles[(i * 24) + 23] = vertexIndex + 13;
+            Triangles[(i * 24) + 22] = vertexIndex + 15;
         }
         mesh.vertices = Vertices;
         mesh.triangles = Triangles;
+        mesh.RecalculateNormals();
     }
 
     void RasterizeBezier()
