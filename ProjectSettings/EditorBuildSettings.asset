@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Procedural.unity
     guid: e26a5b11e83c7db4cbbe80980c6a9849
+  - enabled: 1
+    path: Assets/Scenes/Procedural_TestingGround.unity
+    guid: 178656959ffb30a44b378211f3d0b391
   m_configObjects: {}
