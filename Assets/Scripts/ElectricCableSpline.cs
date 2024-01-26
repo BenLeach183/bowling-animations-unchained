@@ -13,7 +13,8 @@ public class ElectricCableSpline : MonoBehaviour
 
     bool Initialised = false;
 
-    void Start(){
+    void Start()
+    {
         Initialise();
     }
 
@@ -21,11 +22,16 @@ public class ElectricCableSpline : MonoBehaviour
     {
         if (Initialised) return;
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.useWorldSpace = true;
         a = startPoint.position;
-        c = endPoint.position;
+        c =  endPoint.position;
 
-        Vector3 droop = (a + ((c - a) / 2)) - (Vector3.up * (Vector3.Distance(a, c) / 10));
+        //Debug.Log(c);
+
+        Vector3 droop = (a + ((c - a) / 2)) - (transform.root.up * (Vector3.Distance(a, c) * 0.1f));
         b = droop;
+
+        segments = (int)Mathf.Round(Vector3.Distance(a, c));
 
         RasterizeBezier();
 
@@ -35,25 +41,29 @@ public class ElectricCableSpline : MonoBehaviour
 
     }
 
+    void Update(){
+        ReusedUpdate();
+    }
+
     public void ReusedUpdate()
     {
-        if(!Initialised){Initialise();}
+        if (!Initialised) { Initialise(); }
         //Debug.Log("test");
         lineRenderer = GetComponent<LineRenderer>();
         a = startPoint.position;
-        c = endPoint.position;
+        c =  endPoint.position;
 
-        Vector3 droop = (a + ((c - a) / 2)) - (Vector3.up * (Vector3.Distance(a, c) / 10));
+        Vector3 droop = (a + ((c - a) / 2)) - (transform.root.up * (Vector3.Distance(a, c) * 0.1f));
         b = droop;
 
         RasterizeBezier();
 
-        lineRenderer.positionCount = segments + 1;
         lineRenderer.SetPositions(points.ToArray());
     }
 
     private void RasterizeBezier()
     {
+        points = new List<Vector3>();
         for (int i = 0; i <= segments; i++)
         {
             points.Add(GetValue((float)i / segments));

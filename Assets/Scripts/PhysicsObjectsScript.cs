@@ -21,7 +21,7 @@ public class PhysicsObjectsScript : MonoBehaviour
 
         rigidbody = GetComponent<Rigidbody>();
         force = GetComponent<ConstantForce>();
-        force.force = transform.parent.up * -9.8f;
+        force.force = transform.root.up * -9.8f;
         BasePos = transform.localPosition;
         BaseRot = transform.rotation;
         initialised = true;
@@ -31,9 +31,10 @@ public class PhysicsObjectsScript : MonoBehaviour
     public void Replace()
     {
         if (!initialised) { Initialise(); }
-        force.force = transform.parent.up * -9.8f;
+        force.force = transform.root.up * -9.8f;
         rigidbody.velocity = Vector3.zero;
         transform.localPosition = BasePos;
         transform.rotation = BaseRot;
+        //Debug.Log(transform.root.transform.rotation * Vector3.up);
     }
 }
