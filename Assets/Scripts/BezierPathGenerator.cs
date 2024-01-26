@@ -265,12 +265,4 @@ public class BezierPathGenerator : MonoBehaviour
     {
         return a + ((b - a) * t);
     }
-
-    void OnDestroy()
-    {
-        foreach (GameObject item in pointers)
-        {
-            Destroy(item);
-        }
-    }
 }

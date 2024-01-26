@@ -54,7 +54,7 @@ public class FloorTrackObject : MonoBehaviour
     public UnityEvent trackAdded;
 
     // update the default values
-    public void Awake()
+    public void InitialiseTrack()
     {
         this.gameObject.SetActive(false);
 
@@ -66,7 +66,6 @@ public class FloorTrackObject : MonoBehaviour
 
         endPos = localEndPos;
         endRot = localEndRot;
-
     }
 
     public void UpdateBoundingSpheres(Vector3 position, float radius, int index){

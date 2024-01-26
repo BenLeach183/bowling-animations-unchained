@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class ProceduralGeneration : MonoBehaviour
 {
-
     public int maxBackTrackLength = 1;
     public int maxForwardTrackLength = 4;
 
     private int maxTotalTrackLength;
+
+    // a track prefab that is only spawned once at the start
+    public GameObject spawnTrack;
 
     // list of all types of track
     public GameObject[] proceduralElements;
@@ -29,11 +30,16 @@ public class ProceduralGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // store the maxmimum number of tracks
         maxTotalTrackLength = maxBackTrackLength + maxForwardTrackLength;
 
-        // set size of pooled tracks, 2 instances per track type
-        pooledTracks = new GameObject[proceduralElements.Length * numPooledObject];
-        pooledTrackScripts = new FloorTrackObject[proceduralElements.Length * numPooledObject];
+        // set size of pooled tracks, nPooledObjects instances per track type, + 1 for spawn track
+        pooledTracks = new GameObject[(proceduralElements.Length * numPooledObject) + 1];
+        pooledTrackScripts = new FloorTrackObject[(proceduralElements.Length * numPooledObject) + 1];
+
+        // set the first element of array to the spawn prefab
+        pooledTracks[0] = Instantiate(spawnTrack, Vector3.zero, Quaternion.identity);
+        pooledTrackScripts[0] = pooledTracks[0].GetComponent<FloorTrackObject>();
 
         // loop over element type
         for (int i = 0; i < proceduralElements.Length; i++)
@@ -47,8 +53,8 @@ public class ProceduralGeneration : MonoBehaviour
                 // get the track object script
                 FloorTrackObject script = track.GetComponent<FloorTrackObject>();
 
-                // calculate id for track (position in the array)
-                int trackID = (i * numPooledObject) + j;
+                // calculate id for track (position in the array), + 1 for spawn prefab
+                int trackID = (i * numPooledObject) + j + 1;
 
                 // store reference to the track and the script
                 pooledTracks[trackID] = track;
@@ -59,12 +65,15 @@ public class ProceduralGeneration : MonoBehaviour
 
                 // add track to available tracks
                 availableTracks.Add(trackID);
+
+                // initialise the track
+                script.InitialiseTrack();
             }
         }
 
-        // by default enable the first track in the list
+        // by default enable the first track (spawn track) in the list
+        pooledTrackScripts[0].InitialiseTrack();
         pooledTrackScripts[0].EnableTrack();
-        availableTracks.Remove(0);
         currentTracks.Add(0);
     }
 
@@ -75,7 +84,6 @@ public class ProceduralGeneration : MonoBehaviour
         {
             AddTrack();
         }
-
     }
 
 
@@ -215,7 +223,9 @@ public class ProceduralGeneration : MonoBehaviour
 
                 pooledTrackScripts[removeTrackID].Despawn();
                 currentTracks.Remove(removeTrackID);
-                availableTracks.Add(removeTrackID);
+
+                // if the track isn't the spawn track add it to available tracks
+                if(removeTrackID != 0) availableTracks.Add(removeTrackID);
             }
         }
     }
