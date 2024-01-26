@@ -69,7 +69,7 @@ public class buttonManager : MonoBehaviour
                 zoomToScreen = false;
                 if (playButtonPressed)
                 {
-                    SceneManager.LoadScene("Procedural");
+                    SceneManager.LoadScene(1);
                     playButtonPressed = false;
                 }
                 else if (settingsButtonPressed)
