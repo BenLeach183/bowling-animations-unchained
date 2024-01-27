@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using UnityEngine.UI;
+using System.Data;
 
 
 public class PlayerSave
@@ -22,7 +23,9 @@ public class GameManager : MonoBehaviour
     private float OOBDeathTimer;
     private float stuckDeathTimer;
 
-    private float aspectRatio;
+    private float aspectRatio = 1.0f;
+    private byte orientation = 0;
+    private byte oldOrientation;
 
     private GameObject player;
     private PlayerController playerController;
@@ -34,6 +37,8 @@ public class GameManager : MonoBehaviour
     public GameObject settingsMenuLandsape;
     public GameObject settingsMenuPortrait;
     public GameObject darkenBackground;
+
+    private bool inSettingsMenu = false;
 
     public GameObject Joystick, JoystickPoint;
 
@@ -70,6 +75,20 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         aspectRatio = (float)Screen.width / (float)Screen.height;
+        oldOrientation = orientation;
+        
+        if(aspectRatio > 1)
+        {
+            orientation = 1;
+        } else { orientation = 0; }
+
+        // if the orientation has changed
+        if(orientation != oldOrientation)
+        {
+            // update settings menu
+            if (inSettingsMenu) { UpdateSettingsOrientation(); }
+        }
+        
 
         if(playerController.JoystickPivot != Vector2.zero){
             Joystick.SetActive(true);
@@ -170,17 +189,40 @@ public class GameManager : MonoBehaviour
         return playerSave;
     }
 
+    public void CloseSettingsMenu()
+    {
+        DeactivateSettingsMenu();
+        darkenBackground.SetActive(false);
+        Time.timeScale = 1;
+        inSettingsMenu = false;
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
 
         darkenBackground.SetActive(true);
 
-        if(aspectRatio > 1)
+        inSettingsMenu = true;
+        UpdateSettingsOrientation();
+    }
+
+    private void DeactivateSettingsMenu()
+    {
+        settingsMenuLandsape.SetActive(false);
+        settingsMenuPortrait.SetActive(false);
+    }
+
+    private void UpdateSettingsOrientation()
+    {
+        if (orientation >= 1)
         {
             settingsMenuLandsape.SetActive(true);
-        } else
+            settingsMenuPortrait.SetActive(false);
+        }
+        else
         {
+            settingsMenuLandsape.SetActive(false);
             settingsMenuPortrait.SetActive(true);
         }
     }
