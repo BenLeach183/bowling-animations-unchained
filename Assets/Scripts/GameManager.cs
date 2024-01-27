@@ -22,12 +22,18 @@ public class GameManager : MonoBehaviour
     private float OOBDeathTimer;
     private float stuckDeathTimer;
 
+    private float aspectRatio;
+
     private GameObject player;
     private PlayerController playerController;
     private Rigidbody playerRb;
     private FloorTrackObject[] floorTrackObjects;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+
+    public GameObject settingsMenuLandsape;
+    public GameObject settingsMenuPortrait;
+    public GameObject darkenBackground;
 
     public GameObject Joystick, JoystickPoint;
 
@@ -63,6 +69,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        aspectRatio = (float)Screen.width / (float)Screen.height;
+
         if(playerController.JoystickPivot != Vector2.zero){
             Joystick.SetActive(true);
             Joystick.transform.position = playerController.JoystickPivot * 100;
@@ -161,4 +169,20 @@ public class GameManager : MonoBehaviour
         }
         return playerSave;
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+
+        darkenBackground.SetActive(true);
+
+        if(aspectRatio > 1)
+        {
+            settingsMenuLandsape.SetActive(true);
+        } else
+        {
+            settingsMenuPortrait.SetActive(true);
+        }
+    }
+
 }
