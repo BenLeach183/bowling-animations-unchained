@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     private PlayerSave save;
 
+    public float ScoreMultiplier = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,11 +61,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(ScoreMultiplier > 1){
+            ScoreMultiplier -= (Time.deltaTime/5);
+        }
+        else{
+            ScoreMultiplier = 1;
+        }
+
         floorTrackObjects = GetComponent<ProceduralGeneration>().pooledTrackScripts;
 
         if (playerRb.velocity.magnitude > 0.1f)
         {
-            score += Vector3.Scale(playerRb.velocity, playerController.CurrentMoveDirection).magnitude * Time.deltaTime;
+            score += Vector3.Scale(playerRb.velocity, playerController.CurrentMoveDirection).magnitude * ScoreMultiplier * Time.deltaTime;
             stuckDeathTimer = 0;
         }
         else
@@ -109,7 +119,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("End game OOB");
         }
 
-        scoreText.text = Mathf.Round(score).ToString();
+        scoreText.text = Mathf.Round(score).ToString() + " X " + Mathf.Ceil(ScoreMultiplier).ToString();
     }
 
     void EndGame()

@@ -36,6 +36,7 @@ public class PlayerProcedural : MonoBehaviour
             currentCollision = trackId;
 
             // if entered a new track, update the procedural generation
+            
             trackGeneration.CollidedWithTrack(trackId);
         }
     }

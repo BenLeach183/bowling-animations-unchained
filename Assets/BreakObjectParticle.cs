@@ -38,7 +38,6 @@ public class BreakObjectParticle : MonoBehaviour
             if (pushPlayerBack)
             {
                 collision.gameObject.GetComponent<PlayerController>().ExtraForce += collision.gameObject.GetComponent<Rigidbody>().velocity.normalized * collision.gameObject.GetComponent<PlayerController>().speed * pushBackForce;
-                Debug.Log("LMAO u lost points xD");
             }
         }
     }

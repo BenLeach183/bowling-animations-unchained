@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4921015180990324011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739312353860185100}
+  - component: {fileID: 6505032943272287516}
+  - component: {fileID: 3139416957249924530}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739312353860185100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921015180990324011}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6505032943272287516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921015180990324011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc4e5d90168f8d4abcf03009275702b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBackTrackLength: 1
+  maxForwardTrackLength: 8
+  spawnTrack: {fileID: 9094366827769007049, guid: c8cb439e241aae6488683eb3250f0c60, type: 3}
+  proceduralElements:
+  - {fileID: 7176038302334939369, guid: bcd15a8dd9880be4b98d95a40bf33446, type: 3}
+  - {fileID: 9155235612107483981, guid: 8bb35360561d4fa4db95300cc6150ba8, type: 3}
+  - {fileID: 9094366827769007049, guid: 035bf914f77cd1b48a217a3631f7c572, type: 3}
+  - {fileID: 5168598522632732280, guid: 56af56506d09b774086de03a0ed70570, type: 3}
+  - {fileID: 5168598522632732280, guid: f6771e1326e91544facb92aee33c8d5a, type: 3}
+  - {fileID: 6442260999627835193, guid: 03478045461d6c1448a72b7b00b0b8e0, type: 3}
+  - {fileID: 6442260999627835193, guid: 4b18d68f2b6e5d04d8b13f89793802d5, type: 3}
+  pooledTrackScripts: []
+--- !u!114 &3139416957249924530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4921015180990324011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c618b09adcd80b468bf0083560b7c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  highScoreText: {fileID: 0}
+  ScoreMultiplier: 1
