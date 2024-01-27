@@ -2711,7 +2711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6415680731531103902}
   m_LocalRotation: {x: 0.0000000023451427, y: -0, z: 0.000000079025334, w: 1}
-  m_LocalPosition: {x: -10.000002, y: -1.0059996, z: 17.75}
+  m_LocalPosition: {x: -10, y: -1.0059996, z: 17.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2748,12 +2748,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 389451523329257446}
-  - {fileID: 1020630590244046767}
   - {fileID: 8045719868346923134}
   - {fileID: 4731664337165083366}
-  - {fileID: 3538021147775891602}
   - {fileID: 5408547783336449598}
+  - {fileID: 389451523329257446}
+  - {fileID: 1020630590244046767}
+  - {fileID: 3538021147775891602}
   - {fileID: 5245264173008890642}
   - {fileID: 7358737972174910976}
   - {fileID: 1550902996071110271}
@@ -2810,23 +2810,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b8811159b4849418dbb4dbc16993f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turningVolumes: {fileID: 0}
+  turningVolumes: {fileID: 3789829457102227497}
   totalBoundingSphere:
-    position: {x: -11, y: 10, z: -10}
-    radius: 25
+    position: {x: -13.1, y: 10.9, z: -2.18}
+    radius: 24.9
   boundingSpheres:
-  - position: {x: -27, y: 3, z: 0}
-    radius: 5
-  - position: {x: -4, y: 3, z: 0}
-    radius: 5
+  - position: {x: -27.2, y: 3, z: -8.76}
+    radius: 5.93
+  - position: {x: -17.3, y: 3, z: -16.67}
+    radius: 5.93
+  - position: {x: -17.3, y: 3, z: -8.76}
+    radius: 5.93
+  - position: {x: -27.2, y: 3, z: 0.24}
+    radius: 5.93
+  - position: {x: -20.2, y: 3, z: 0.24}
+    radius: 5.93
+  - position: {x: -1.96, y: 2.02, z: 1.18}
+    radius: 3.64
+  - position: {x: -4.93, y: 4.47, z: -1.37}
+    radius: 4.52
+  - position: {x: -1.96, y: 2.02, z: -2.97}
+    radius: 3.64
   - position: {x: -27, y: 3, z: -17}
     radius: 5
-  - position: {x: -11, y: 3, z: 10}
-    radius: 5
+  - position: {x: -8.15, y: 1.34, z: 14.7}
+    radius: 3.43
+  - position: {x: -9.79, y: 1.34, z: 14.7}
+    radius: 3.43
+  - position: {x: -11, y: 2.54, z: 8.91}
+    radius: 5.14
   - position: {x: -11, y: 3, z: -17}
     radius: 5
-  - position: {x: -12, y: 30, z: -1}
+  - position: {x: -11.5, y: 30.6, z: -1}
     radius: 5
+  - position: {x: -11.5, y: 20.7, z: -1}
+    radius: 6.43
+  - position: {x: -11.5, y: -2.35, z: -1}
+    radius: 8.79
+  - position: {x: -11.5, y: 9.6, z: -1}
+    radius: 6.43
   turningVolumeCollider: {fileID: 0}
   trackEnterCollider: {fileID: 0}
   connected: 1
