@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
     private FloorTrackObject[] floorTrackObjects;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI multiplierText;
+    public GameObject multiplierObject;
 
     public GameObject settingsMenuLandsape;
     public GameObject settingsMenuPortrait;
@@ -156,7 +158,18 @@ public class GameManager : MonoBehaviour
             Debug.Log("End game OOB");
         }
 
-        scoreText.text = Mathf.Round(score).ToString() + " X " + Mathf.Ceil(ScoreMultiplier).ToString();
+        scoreText.text = Mathf.Round(score).ToString();
+
+        int multipler = (int)Mathf.Ceil(ScoreMultiplier);
+        multiplierText.text = "x" + multipler.ToString();
+
+        if (multipler > 1)
+        {
+            multiplierObject.SetActive(true);
+        } else
+        {
+            multiplierObject.SetActive(false);
+        }
     }
 
     void EndGame()
