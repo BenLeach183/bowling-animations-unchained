@@ -5,10 +5,10 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
-using System.IO;
+using UnityEngine.UI;
+
 
 public class PlayerSave
 {
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     private FloorTrackObject[] floorTrackObjects;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
+
+    public GameObject Joystick, JoystickPoint;
 
     private bool withinBounds = false;
 
@@ -61,7 +63,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerController.JoystickPivot != Vector2.zero){
+            Joystick.SetActive(true);
+            Joystick.transform.position = playerController.JoystickPivot * 100;
+            JoystickPoint.transform.position = (playerController.InputVector * Joystick.transform.localScale.x * 30) + (playerController.JoystickPivot * 100);
+        }
+        else{
+            Joystick.SetActive(false);
+        }
+
         if(ScoreMultiplier > 1){
             ScoreMultiplier -= (Time.deltaTime/5);
         }

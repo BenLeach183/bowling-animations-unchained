@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     bool firstInput = true;
     public bool onTrack = true;
 
-    Vector2 InputVector = Vector2.zero;
+    public Vector2 InputVector = Vector2.zero;
 
-    Vector2 JoystickPivot;
+    public Vector2 JoystickPivot;
 
     ConstantForce Force;
     Rigidbody Rigidbody;
@@ -70,14 +70,15 @@ public class PlayerController : MonoBehaviour
     private void JoystickInput(){
         if(Input.touchCount > 0){
             if(firstInput){
-                JoystickPivot = Input.mousePosition;
+                JoystickPivot = Input.mousePosition/100;
                 firstInput = false;
             }
 
-            InputVector = ((Vector2)Input.mousePosition - JoystickPivot).normalized;
+            InputVector = Vector2.ClampMagnitude((Vector2)Input.mousePosition/100 - JoystickPivot, 1f);
         }
         else{
             firstInput = true;
+            JoystickPivot = Vector2.zero;
         }
     }
 
