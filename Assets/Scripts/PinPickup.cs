@@ -9,6 +9,8 @@ public class PinPickup : MonoBehaviour
     Vector3 LocalPosReset;
     Quaternion LocalRotReset;
     private bool Initialized = false;
+
+    private bool Once = false;
     void Initialize(){
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         LocalPosReset = transform.localPosition;
@@ -19,6 +21,7 @@ public class PinPickup : MonoBehaviour
     public void ReuseUpdate(){
         if(!Initialized){Initialize();}
 
+        Once = false;
         transform.localPosition = LocalPosReset;
         transform.localRotation = LocalRotReset;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -26,7 +29,8 @@ public class PinPickup : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision){
-        if(collision.transform.tag == "Player"){
+        if(collision.transform.tag == "Player" && !Once){
+            Once = true;
             gameObject.layer = LayerMask.NameToLayer("PinUsed");
             gameManager.ScoreMultiplier += 1;
         }
