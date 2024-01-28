@@ -27,6 +27,8 @@ public class ProceduralGeneration : MonoBehaviour
     // list of available tracks
     private List<int> availableTracks = new List<int>();
 
+    public int onTrackID = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -236,6 +238,9 @@ public class ProceduralGeneration : MonoBehaviour
 
         // if the track collider being entered isn't the next track, ignore
         if (index > maxBackTrackLength+1) return;
+
+        // set the on track id to this track
+        onTrackID = trackID;
 
         // enable turning volume for this track
         pooledTrackScripts[currentTracks[index]].TurningVolumeActive(true);

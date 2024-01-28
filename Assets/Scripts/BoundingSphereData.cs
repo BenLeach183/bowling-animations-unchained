@@ -42,6 +42,11 @@ public class BoundingSphereData
         return radius;
     }
 
+    public float GetRadiusSqr()
+    {
+        return radius * radius;
+    }
+
     public void Rotate(Quaternion rotation)
     {
         position = rotation * position;

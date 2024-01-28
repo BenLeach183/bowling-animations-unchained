@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     public float ScoreMultiplier = 1;
 
+    private ProceduralGeneration proceduralGenerationScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         playerRb = player.GetComponent<Rigidbody>();
         floorTrackObjects = GetComponent<ProceduralGeneration>().pooledTrackScripts;
+        proceduralGenerationScript = GetComponent<ProceduralGeneration>();
 
         try
         {
@@ -132,15 +135,21 @@ public class GameManager : MonoBehaviour
             highScore = score;
         }
 
+        // check if the player has fallen
         withinBounds = false;
-        for (int i = 0; i < floorTrackObjects.Length; i++)
+
+        // get the track object player was last on
+        FloorTrackObject currentTrack = proceduralGenerationScript.pooledTrackScripts[proceduralGenerationScript.onTrackID];
+
+        // get the distance from current track bounding sphere
+        Vector3 offsetFromTrack = player.transform.position - currentTrack.totalBoundingSphere.GetPosition();
+        float distanceFromTrackSqrd = offsetFromTrack.sqrMagnitude;
+
+        // if the player has left the current tracks bounding sphere they have lost
+        if (distanceFromTrackSqrd < currentTrack.totalBoundingSphere.GetRadiusSqr())
         {
-            if ((player.transform.position - floorTrackObjects[i].totalBoundingSphere.GetPosition()).magnitude < floorTrackObjects[i].totalBoundingSphere.GetRadius())
-            {
-                withinBounds = true;
-                OOBDeathTimer = 0;
-                break;
-            }
+            withinBounds = true;
+            OOBDeathTimer = 0;
         }
 
         if (!withinBounds && !playerController.onTrack)
@@ -152,7 +161,7 @@ public class GameManager : MonoBehaviour
             OOBDeathTimer = 0;
         }
 
-        if (OOBDeathTimer > 3f)
+        if (OOBDeathTimer > 0.5f)
         {
             EndGame();
             Debug.Log("End game OOB");
