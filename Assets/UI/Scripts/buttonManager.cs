@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Security;
 using UnityEditor.Rendering;
+using TMPro;
 
 public class buttonManager : MonoBehaviour
 {
@@ -20,36 +21,45 @@ public class buttonManager : MonoBehaviour
 
     private Transform cameraStartingTrans;
 
+    [SerializeField]
+    private GameObject screenSpaceCanvas;
+    [SerializeField]
+    private Transform settingsScreen;
+    [SerializeField]
+    private Transform playScreen;
+    [SerializeField]
+    private TextMeshProUGUI tapToPlayTxt;
+    private float playFontSize;
+
+    private Transform targetPosition;
+
     private void Start()
     {
         cameraStartingTrans = Camera.main.transform;
+        playFontSize = tapToPlayTxt.fontSize;
     }
 
-    public void StartGame(GameObject m_button)
+    public void StartGame()
     {
-        button = m_button;
-
-        Button playButton = button.GetComponent<Button>();
-        playButton.interactable = false;
+        screenSpaceCanvas.SetActive(false);
 
         playButtonPressed = true;
 
-        zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
+        targetPosition = playScreen;
+        zoomDistance = Vector3.Distance(cameraStartingTrans.position, playScreen.position);
         startTime = Time.time;
 
         zoomToScreen = true;
     }
 
-    public void OpenSettings(GameObject m_button)
+    public void OpenSettings()
     {
-        button = m_button;
-
-        Button settingsButton = button.GetComponent<Button>();
-        settingsButton.interactable = false;
+        screenSpaceCanvas.SetActive(false);
 
         settingsButtonPressed = true;
 
-        zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
+        targetPosition = settingsScreen;
+        zoomDistance = Vector3.Distance(cameraStartingTrans.position, settingsScreen.position);
         startTime = Time.time;
 
         zoomToScreen = true;
@@ -64,7 +74,7 @@ public class buttonManager : MonoBehaviour
     {
         if (zoomToScreen)
         {
-            if (cameraStartingTrans.position == button.transform.position)
+            if (cameraStartingTrans.position == targetPosition.position)
             {
                 zoomToScreen = false;
                 if (playButtonPressed)
@@ -84,8 +94,11 @@ public class buttonManager : MonoBehaviour
                 float distanceCovered = (Time.time - startTime) * zoomSpeed;
                 float fractionOfDistance = distanceCovered / zoomDistance;
 
-                cameraStartingTrans.position = Vector3.Lerp(cameraStartingTrans.position, button.transform.position, fractionOfDistance);
+                cameraStartingTrans.position = Vector3.Lerp(cameraStartingTrans.position, targetPosition.position, fractionOfDistance);
             }
         }
+
+        playFontSize += Mathf.Sin(Time.timeSinceLevelLoad * 3.0f) * 0.03f;
+        tapToPlayTxt.fontSize = playFontSize;
     }
 }
