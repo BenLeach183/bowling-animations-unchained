@@ -152,7 +152,7 @@ public class SettingsMenu : MonoBehaviour
         }
 
         //save settings
-        saveScript.Save();
+        saveScript.SavePlayerData(playerData);
     }
 
     //Music button Pressed
@@ -178,13 +178,25 @@ public class SettingsMenu : MonoBehaviour
         }
 
         //save settings
-        saveScript.Save();
+        saveScript.SavePlayerData(playerData);
     }
 
     //Post Processing Pressed
     public void postProcessingClick()
     {
+        //Toggles if post processing is enabled or not
+        if (playerData.enablePostProcessing)
+        {
+            playerData.enablePostProcessing = false;
+            Txt_Post_Processing.text = "Disabled Post \nProcessing";
+        } else
+        {
+            playerData.enablePostProcessing = true;
+            Txt_Post_Processing.text = "Enabled Post \nProcessing";
+        }
 
+        //save settings
+        saveScript.SavePlayerData(playerData);
     }
 
     //Controls Pressed
@@ -229,7 +241,7 @@ public class SettingsMenu : MonoBehaviour
         }
 
         //Save new option
-        saveScript.Save();
+        saveScript.SavePlayerData(playerData);
     }
 
 
