@@ -2810,6 +2810,9 @@ MonoBehaviour:
   Txt_Post_Processing: {fileID: 387172753}
   Txt_Loading: {fileID: 2010789091}
   Txt_Highscore: {fileID: 1521060586}
+  Txt_Controls: {fileID: 1632267341}
+  Txt_Music: {fileID: 970695565}
+  Txt_SFX: {fileID: 1536836925}
 --- !u!114 &2120471423
 MonoBehaviour:
   m_ObjectHideFlags: 0
