@@ -13,7 +13,7 @@ using System.Data;
 
 public class PlayerSave
 {
-    public float highScoreSave;
+    public float highScoreSave = 0;
 }
 
 public class GameManager : MonoBehaviour
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     private bool withinBounds = false;
 
-    private PlayerSave save;
+    private PlayerSave save = new PlayerSave();
 
     public float ScoreMultiplier = 1;
 
@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         catch
         {
             Debug.Log("Error");
-            SavePlayerData(0);
-            save = new PlayerSave() { highScoreSave = 0 };
+            SavePlayerData(save);
+            //save = new PlayerSave();
         }
 
         highScore = save.highScoreSave;
@@ -183,17 +183,14 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        SavePlayerData(highScore);
+        SavePlayerData(save);
         SceneManager.LoadScene(0);
     }
 
-    public void SavePlayerData(float highScorein)
+    public void SavePlayerData(PlayerSave save)
     {
-        PlayerSave newPlayerSave = new PlayerSave()
-        {
-            highScoreSave = highScorein
-        };
-
+        PlayerSave newPlayerSave = save;
+  
         string output = JsonConvert.SerializeObject(newPlayerSave);
         using (StreamWriter streamWriter = new StreamWriter(Application.persistentDataPath + "/PlayerSave.dat"))
         {
