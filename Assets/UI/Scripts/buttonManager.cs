@@ -9,7 +9,6 @@ using UnityEditor.Rendering;
 public class buttonManager : MonoBehaviour
 {
     private GameObject button;
-    private GameObject mainCamera;
 
     private bool zoomToScreen = false;
     private bool playButtonPressed = false;
@@ -21,6 +20,11 @@ public class buttonManager : MonoBehaviour
 
     private Transform cameraStartingTrans;
 
+    private void Start()
+    {
+        cameraStartingTrans = Camera.main.transform;
+    }
+
     public void StartGame(GameObject m_button)
     {
         button = m_button;
@@ -30,8 +34,6 @@ public class buttonManager : MonoBehaviour
 
         playButtonPressed = true;
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraStartingTrans = mainCamera.transform;
         zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
         startTime = Time.time;
 
@@ -47,8 +49,6 @@ public class buttonManager : MonoBehaviour
 
         settingsButtonPressed = true;
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraStartingTrans = mainCamera.transform;
         zoomDistance = Vector3.Distance(cameraStartingTrans.position, button.transform.position);
         startTime = Time.time;
 
@@ -64,7 +64,7 @@ public class buttonManager : MonoBehaviour
     {
         if (zoomToScreen)
         {
-            if (mainCamera.transform.position == button.transform.position)
+            if (cameraStartingTrans.position == button.transform.position)
             {
                 zoomToScreen = false;
                 if (playButtonPressed)
@@ -83,7 +83,7 @@ public class buttonManager : MonoBehaviour
                 float distanceCovered = (Time.time - startTime) * zoomSpeed;
                 float fractionOfDistance = distanceCovered / zoomDistance;
 
-                mainCamera.transform.position = Vector3.Lerp(cameraStartingTrans.position, button.transform.position, fractionOfDistance);
+                cameraStartingTrans.position = Vector3.Lerp(cameraStartingTrans.position, button.transform.position, fractionOfDistance);
             }
         }
     }
