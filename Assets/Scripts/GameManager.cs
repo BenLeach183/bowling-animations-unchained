@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 using System.Data;
+using RDG;
 
 public class GameManager : MonoBehaviour
 {
@@ -171,6 +172,9 @@ public class GameManager : MonoBehaviour
         {
             saveManager.playerSave.highScoreSave = score;
         }
+
+        Vibration.Vibrate(1000);
+
         saveManager.Save();
         SceneManager.LoadScene(0);
     }
@@ -178,6 +182,7 @@ public class GameManager : MonoBehaviour
     public void CloseSettingsMenu()
     {
         DeactivateSettingsMenu();
+        Vibration.Vibrate(100);
         darkenBackground.SetActive(false);
         Time.timeScale = 1;
         inSettingsMenu = false;
@@ -185,6 +190,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Vibration.Vibrate(100);
         Time.timeScale = 0;
 
         darkenBackground.SetActive(true);
