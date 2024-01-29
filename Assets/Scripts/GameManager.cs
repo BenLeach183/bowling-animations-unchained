@@ -10,12 +10,6 @@ using Newtonsoft.Json;
 using UnityEngine.UI;
 using System.Data;
 
-
-public class PlayerSave
-{
-    public float highScoreSave = 0;
-}
-
 public class GameManager : MonoBehaviour
 {
     private float score;
@@ -46,11 +40,11 @@ public class GameManager : MonoBehaviour
 
     private bool withinBounds = false;
 
-    private PlayerSave save = new PlayerSave();
-
     public float ScoreMultiplier = 1;
 
     private ProceduralGeneration proceduralGenerationScript;
+
+    private SaveManager saveManager;
 
     // Start is called before the first frame update
     void Start()
@@ -60,19 +54,9 @@ public class GameManager : MonoBehaviour
         playerRb = player.GetComponent<Rigidbody>();
         floorTrackObjects = GetComponent<ProceduralGeneration>().pooledTrackScripts;
         proceduralGenerationScript = GetComponent<ProceduralGeneration>();
+        saveManager = GetComponent<SaveManager>();
 
-        try
-        {
-            save = LoadSaveData();
-        }
-        catch
-        {
-            Debug.Log("Error");
-            SavePlayerData(save);
-            //save = new PlayerSave();
-        }
-
-        highScore = save.highScoreSave;
+        highScore = saveManager.playerSave.highScoreSave;
         highScoreText.text = "High Score: " + Mathf.Round(highScore).ToString();
     }
 
@@ -183,33 +167,12 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        if(score > save.highScoreSave)
+        if(score > saveManager.playerSave.highScoreSave)
         {
-            save.highScoreSave = score;
+            saveManager.playerSave.highScoreSave = score;
         }
-        SavePlayerData(save);
+        saveManager.Save();
         SceneManager.LoadScene(0);
-    }
-
-    public void SavePlayerData(PlayerSave save)
-    {
-        PlayerSave newPlayerSave = save;
-  
-        string output = JsonConvert.SerializeObject(newPlayerSave);
-        using (StreamWriter streamWriter = new StreamWriter(Application.persistentDataPath + "/PlayerSave.dat"))
-        {
-            streamWriter.Write(output);
-        }
-    }
-
-    public PlayerSave LoadSaveData()
-    {
-        PlayerSave playerSave = new PlayerSave();
-        using (StreamReader streamReader = new StreamReader(Application.persistentDataPath + "/PlayerSave.dat"))
-        {
-            playerSave = JsonConvert.DeserializeObject<PlayerSave>(streamReader.ReadToEnd());
-        }
-        return playerSave;
     }
 
     public void CloseSettingsMenu()
