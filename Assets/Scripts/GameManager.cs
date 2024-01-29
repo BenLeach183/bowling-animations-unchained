@@ -183,6 +183,10 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
+        if(score > save.highScoreSave)
+        {
+            save.highScoreSave = score;
+        }
         SavePlayerData(save);
         SceneManager.LoadScene(0);
     }
