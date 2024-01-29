@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
     public void CloseSettingsMenu()
     {
         DeactivateSettingsMenu();
-        Vibration.Vibrate(100);
+        Vibration.Vibrate(50);
         darkenBackground.SetActive(false);
         Time.timeScale = 1;
         inSettingsMenu = false;
@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Vibration.Vibrate(100);
+        Vibration.Vibrate(50);
         Time.timeScale = 0;
 
         darkenBackground.SetActive(true);
