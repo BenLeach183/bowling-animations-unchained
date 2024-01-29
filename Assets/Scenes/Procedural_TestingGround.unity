@@ -721,6 +721,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadedData: 0
+--- !u!114 &1100174781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3139416957249924530, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
+  m_PrefabInstance: {fileID: 5222790112662639498}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100174779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c618b09adcd80b468bf0083560b7c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1730481250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7860803023656891762, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
@@ -944,9 +955,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4074777599858403548, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1100174781}
+    - target: {fileID: 4074777599858403548, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4147445747910834712, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
       propertyPath: m_Color.a
       value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998372823138916519, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1100174781}
+    - target: {fileID: 5998372823138916519, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7026301807923600885, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
       propertyPath: m_Name
@@ -955,6 +982,22 @@ PrefabInstance:
     - target: {fileID: 7280034433296382504, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
       propertyPath: m_Color.a
       value: 0.7529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 8098730757294560867, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1100174781}
+    - target: {fileID: 8098730757294560867, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392473370161186146, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1100174781}
+    - target: {fileID: 8392473370161186146, guid: bf7dc251e3c328b4f8dc3f1e5f6b8d1d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
