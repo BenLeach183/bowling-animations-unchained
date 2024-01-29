@@ -1,3 +1,4 @@
+using RDG;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,7 @@ public class PinPickup : MonoBehaviour
             Once = true;
             gameObject.layer = LayerMask.NameToLayer("PinUsed");
             gameManager.ScoreMultiplier += 1;
+            Vibration.Vibrate(100);
         }
     }
 }

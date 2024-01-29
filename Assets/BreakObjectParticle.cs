@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using RDG;
 
 public class BreakObjectParticle : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class BreakObjectParticle : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Vibration.Vibrate(200);
             particles.Play();
             meshRenderer.material.color = transparent;
             thisCollision.enabled = false;
