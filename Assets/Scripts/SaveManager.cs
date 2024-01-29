@@ -6,11 +6,11 @@ using System.IO;
 
 public class PlayerSave
 {
-    public float highScoreSave;
-    int controllerModes;
-    bool muteMusic;
-    bool muteSFX;
-    bool enablePostProcessing;
+    public float highScoreSave = 0;
+    public int controllerModes = 0; //0 = Tap, 1 = Joystick, 2 = Tilt
+    public bool muteMusic = false;
+    public bool muteSFX = false;
+    public bool enablePostProcessing = false;
 }
 
 public class SaveManager : MonoBehaviour
@@ -22,6 +22,7 @@ public class SaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         try
         {
             playerSave = LoadSaveData();

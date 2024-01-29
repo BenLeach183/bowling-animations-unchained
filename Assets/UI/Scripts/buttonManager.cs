@@ -76,6 +76,7 @@ public class buttonManager : MonoBehaviour
                 {
                     //open settings menu
                     settingsButtonPressed = false;
+                    SceneManager.LoadSceneAsync("SettingsMenu");
                 }
             }
             else

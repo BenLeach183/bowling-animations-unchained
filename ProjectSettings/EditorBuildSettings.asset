@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing Grounds (Ethans).unity
     guid: 4b955ebca0cc1624a9d1c7c5a60acb2f
+  - enabled: 1
+    path: Assets/Scenes/SettingsMenu.unity
+    guid: 1ddb0a557f5db8441a5cea2338291e13
   m_configObjects: {}
