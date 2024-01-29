@@ -980,11 +980,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 99e78605-f45a-4af8-8a91-e80b2c5d6b5d
+  cloudProjectId: 5c2a8b22-3116-4635-ad24-0f71543be1ea
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: bowling-animations-unchained
-  organizationId: ethantl28_unity
+  organizationId: maxfandango
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
