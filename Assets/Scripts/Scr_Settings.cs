@@ -11,6 +11,9 @@ public class SettingsMenu : MonoBehaviour
     protected AudioManager audioScript;
     private PlayerSave playerData;
 
+    [SerializeField] private bool inGameMenu;
+    [SerializeField] private GameObject postProcessing;
+
     [SerializeField] private Button Btn_muted_Music;
     [SerializeField] private Button Btn_muted_SFX;
     [SerializeField] private Button Btn_Unmuted_Music;
@@ -57,19 +60,25 @@ public class SettingsMenu : MonoBehaviour
 
     private void enableButtons(PlayerSave playerData)
     {
-        //Remove Loading Text
-        Txt_Loading.gameObject.SetActive(false);
-
         //These will always be enabled
-        Banner.gameObject.SetActive(true);
-        Btn_Home.gameObject.SetActive(true);
         Btn_Post_Processing.gameObject.SetActive(true);
         Txt_Controls.gameObject.SetActive(true);
         Txt_Music.gameObject.SetActive(true);
         Txt_SFX.gameObject.SetActive(true);
         Txt_Post_Processing.gameObject.SetActive(true);
-        Txt_Settings.gameObject.SetActive(true);
         Drp_Graphics.gameObject.SetActive(true);
+
+        // if the settings menu is in game don't use these
+        if(!inGameMenu)
+        {
+            //Remove Loading Text
+            Txt_Loading.gameObject.SetActive(false);
+
+
+            Btn_Home.gameObject.SetActive(true);
+            Banner.gameObject.SetActive(true);
+            Txt_Settings.gameObject.SetActive(true);
+        }
 
 
         //Select Correct Dropdown
@@ -206,10 +215,16 @@ public class SettingsMenu : MonoBehaviour
         {
             playerData.enablePostProcessing = false;
             Txt_Post_Processing.text = "Disabled Post \nProcessing";
+
+            // update post processing if in game
+            if (inGameMenu) postProcessing.SetActive(false);
         } else
         {
             playerData.enablePostProcessing = true;
             Txt_Post_Processing.text = "Enabled Post \nProcessing";
+
+            // update post processing if in game
+            if (inGameMenu) postProcessing.SetActive(true);
         }
 
         //save settings
