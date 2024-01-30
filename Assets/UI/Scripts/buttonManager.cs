@@ -21,45 +21,22 @@ public class buttonManager : MonoBehaviour
 
     private Transform cameraStartingTrans;
 
-    protected SaveManager saveScript;
-    [SerializeField] private GameObject screenSpaceCanvas;
-    [SerializeField] private Transform settingsScreen;
-    [SerializeField] private Transform playScreen;
-    [SerializeField] private TextMeshProUGUI tapToPlayTxt;
-    [SerializeField] private TextMeshPro highscoreTxtTV;
-    [SerializeField] private TextMeshProUGUI highscoreTxtScreen;
+    [SerializeField]
+    private GameObject screenSpaceCanvas;
+    [SerializeField]
+    private Transform settingsScreen;
+    [SerializeField]
+    private Transform playScreen;
+    [SerializeField]
+    private TextMeshProUGUI tapToPlayTxt;
     private float playFontSize;
 
     private Transform targetPosition;
 
-    private PlayerSave playerData;
-
-    IEnumerator Start()
+    private void Start()
     {
         cameraStartingTrans = Camera.main.transform;
         playFontSize = tapToPlayTxt.fontSize;
-
-        //attempt to load data
-        saveScript = GetComponent<SaveManager>();
-
-        // wait until SaveManager has loaded saves
-        yield return new WaitUntil(() => saveScript.loadedData);
-
-        try
-        {
-            //Attempt to load save
-            playerData = saveScript.LoadSaveData();
-            // update the highscore
-            highscoreTxtTV.text = "Highscore\n\n" + Mathf.Floor(playerData.highScoreSave).ToString();
-            highscoreTxtScreen.text = Mathf.Floor(playerData.highScoreSave).ToString();
-        }
-
-        catch
-        {
-            //If no save loaded, use default
-            Debug.Log("No save file detected");
-            saveScript.SavePlayerData(playerData);
-        }
     }
 
     public void StartGame()
@@ -97,7 +74,7 @@ public class buttonManager : MonoBehaviour
     {
         if (zoomToScreen)
         {
-            if ((cameraStartingTrans.position - targetPosition.position).sqrMagnitude <= 0.02f)
+            if (cameraStartingTrans.position == targetPosition.position)
             {
                 zoomToScreen = false;
                 if (playButtonPressed)
@@ -121,7 +98,7 @@ public class buttonManager : MonoBehaviour
             }
         }
 
-        playFontSize += Mathf.Sin(Time.timeSinceLevelLoad * 3.0f) * 0.1f;
+        playFontSize += Mathf.Sin(Time.timeSinceLevelLoad * 3.0f) * 0.03f;
         tapToPlayTxt.fontSize = playFontSize;
     }
 }
