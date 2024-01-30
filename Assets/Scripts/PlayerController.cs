@@ -65,11 +65,18 @@ public class PlayerController : MonoBehaviour
         InputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         int inputType = saveManager.playerSave.controllerModes;
-        //JoystickInput();
-        //TiltInput();
-        TapInput();
-
-
+        if(inputType == 0)
+        {
+            TapInput();
+        }
+        else if(inputType == 1)
+        {
+            JoystickInput();
+        }
+        else
+        {
+            TiltInput();
+        }
     }
 
     private void JoystickInput(){
