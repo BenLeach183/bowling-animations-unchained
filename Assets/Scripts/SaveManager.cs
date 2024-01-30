@@ -11,6 +11,7 @@ public class PlayerSave
     public bool muteMusic = false;
     public bool muteSFX = false;
     public bool enablePostProcessing = false;
+    public byte graphicsSetting = 0;
 }
 
 public class SaveManager : MonoBehaviour

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +26,9 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Txt_Controls;
     [SerializeField] private TextMeshProUGUI Txt_Music;
     [SerializeField] private TextMeshProUGUI Txt_SFX;
+    [SerializeField] private TextMeshProUGUI Txt_Settings;
+    [SerializeField] private RectTransform Banner;
+    [SerializeField] private TMP_Dropdown Drp_Graphics;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -58,11 +62,20 @@ public class SettingsMenu : MonoBehaviour
         Txt_Loading.gameObject.SetActive(false);
 
         //These will always be enabled
+        Banner.gameObject.SetActive(true);
         Btn_Home.gameObject.SetActive(true);
         Btn_Post_Processing.gameObject.SetActive(true);
         Txt_Controls.gameObject.SetActive(true);
         Txt_Music.gameObject.SetActive(true);
         Txt_SFX.gameObject.SetActive(true);
+        Txt_Post_Processing.gameObject.SetActive(true);
+        Txt_Settings.gameObject.SetActive(true);
+        Drp_Graphics.gameObject.SetActive(true);
+
+
+        //Select Correct Dropdown
+        Drp_Graphics.SetValueWithoutNotify(playerData.graphicsSetting);
+
 
         //Check if music was muted
         if (playerData.muteMusic)
@@ -262,5 +275,24 @@ public class SettingsMenu : MonoBehaviour
         //Returns to main menu
         SceneManager.LoadSceneAsync("MainMenuAdjusted");
     }
-    
+
+    public void dropDown()
+    {
+        //Updating Graphics Settings
+        switch (Drp_Graphics.value)
+        {
+            case 0:
+                playerData.graphicsSetting = 0;
+                break;
+            case 1:
+                playerData.graphicsSetting = 1;
+                break;
+            case 2:
+                playerData.graphicsSetting = 2;
+                break;
+        }
+
+        //Save new information
+        saveScript.SavePlayerData(playerData);
+    }
 }
