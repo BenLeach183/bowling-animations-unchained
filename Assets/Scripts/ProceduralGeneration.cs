@@ -20,7 +20,7 @@ public class ProceduralGeneration : MonoBehaviour
     public FloorTrackObject[] pooledTrackScripts;
 
     // number of pooled objects for each type
-    private byte numPooledObject = 3;
+    private byte numPooledObject = 2;
 
     // list of tracks in scene
     private List<int> currentTracks = new List<int>();
