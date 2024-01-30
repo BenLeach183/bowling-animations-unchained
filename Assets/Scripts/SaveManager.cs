@@ -10,7 +10,7 @@ public class PlayerSave
     public int controllerModes = 0; //0 = Tap, 1 = Joystick, 2 = Tilt
     public bool muteMusic = false;
     public bool muteSFX = false;
-    public bool enablePostProcessing = false;
+    public bool enablePostProcessing = true;
     public byte graphicsSetting = 0;
 }
 

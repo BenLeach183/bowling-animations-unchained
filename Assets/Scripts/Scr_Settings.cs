@@ -282,12 +282,15 @@ public class SettingsMenu : MonoBehaviour
         {
             case 0:
                 playerData.graphicsSetting = 0;
+                QualitySettings.SetQualityLevel(0);
                 break;
             case 1:
                 playerData.graphicsSetting = 1;
+                QualitySettings.SetQualityLevel(1);
                 break;
             case 2:
                 playerData.graphicsSetting = 2;
+                QualitySettings.SetQualityLevel(2);
                 break;
         }
 
