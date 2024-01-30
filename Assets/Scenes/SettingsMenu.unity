@@ -4143,6 +4143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f316688f0e53dfb44b3d210d21aff479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveScript: {fileID: 2120471423}
+  inGameMenu: 0
+  postProcessing: {fileID: 0}
   Btn_muted_Music: {fileID: 2033966539}
   Btn_muted_SFX: {fileID: 1756601796}
   Btn_Unmuted_Music: {fileID: 506066158}

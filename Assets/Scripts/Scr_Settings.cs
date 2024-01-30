@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    protected SaveManager saveScript;
+    [SerializeField] private SaveManager saveScript;
     protected AudioManager audioScript;
     private PlayerSave playerData;
 
@@ -36,7 +36,7 @@ public class SettingsMenu : MonoBehaviour
     IEnumerator Start()
     {
         //attempt to load data
-        saveScript = GetComponent<SaveManager>();
+        //saveScript = GetComponent<SaveManager>();
         audioScript = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         // wait until SaveManager has loaded saves

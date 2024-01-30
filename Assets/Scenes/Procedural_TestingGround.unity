@@ -2504,19 +2504,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4921015180990324011, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
   m_PrefabInstance: {fileID: 5222790112662639498}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1100174780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100174779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97115c0682834ef49b70cd82cac39560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadedData: 0
 --- !u!114 &1100174781 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3139416957249924530, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
@@ -2771,7 +2758,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1261424425}
   - component: {fileID: 1261424426}
-  - component: {fileID: 1261424427}
   m_Layer: 5
   m_Name: Settings_Menu
   m_TagString: Untagged
@@ -2823,6 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f316688f0e53dfb44b3d210d21aff479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveScript: {fileID: 5222790112662639499}
   inGameMenu: 1
   postProcessing: {fileID: 805676854}
   Btn_muted_Music: {fileID: 1769760219}
@@ -2842,19 +2829,6 @@ MonoBehaviour:
   Txt_Settings: {fileID: 0}
   Banner: {fileID: 0}
   Drp_Graphics: {fileID: 2021712527}
---- !u!114 &1261424427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261424424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97115c0682834ef49b70cd82cac39560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadedData: 0
 --- !u!1 &1396804425
 GameObject:
   m_ObjectHideFlags: 0
@@ -5230,6 +5204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f316688f0e53dfb44b3d210d21aff479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveScript: {fileID: 5222790112662639499}
   inGameMenu: 1
   postProcessing: {fileID: 805676854}
   Btn_muted_Music: {fileID: 7830752255583627969}
@@ -5761,9 +5736,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4921015180990324011, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1100174780}
     - targetCorrespondingSourceObject: {fileID: 4921015180990324011, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5222790112662639500}
@@ -6685,7 +6657,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2556388855659461476}
   - component: {fileID: 3656178107273443315}
-  - component: {fileID: 7935583783308969151}
   m_Layer: 5
   m_Name: Settings_Menu
   m_TagString: Untagged
@@ -6940,19 +6911,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7935583783308969151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7618725615622700214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97115c0682834ef49b70cd82cac39560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadedData: 0
 --- !u!224 &7960175037751890473
 RectTransform:
   m_ObjectHideFlags: 0
