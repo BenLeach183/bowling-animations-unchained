@@ -22,16 +22,12 @@ public class buttonManager : MonoBehaviour
     private Transform cameraStartingTrans;
 
     protected SaveManager saveScript;
-    [SerializeField]
-    private GameObject screenSpaceCanvas;
-    [SerializeField]
-    private Transform settingsScreen;
-    [SerializeField]
-    private Transform playScreen;
-    [SerializeField]
-    private TextMeshProUGUI tapToPlayTxt;
-    [SerializeField]
-    private TextMeshPro highscoreTxt;
+    [SerializeField] private GameObject screenSpaceCanvas;
+    [SerializeField] private Transform settingsScreen;
+    [SerializeField] private Transform playScreen;
+    [SerializeField] private TextMeshProUGUI tapToPlayTxt;
+    [SerializeField] private TextMeshPro highscoreTxtTV;
+    [SerializeField] private TextMeshProUGUI highscoreTxtScreen;
     private float playFontSize;
 
     private Transform targetPosition;
@@ -54,7 +50,8 @@ public class buttonManager : MonoBehaviour
             //Attempt to load save
             playerData = saveScript.LoadSaveData();
             // update the highscore
-            highscoreTxt.text = "Highscore\n\n" + Mathf.Floor(playerData.highScoreSave).ToString();
+            highscoreTxtTV.text = "Highscore\n\n" + Mathf.Floor(playerData.highScoreSave).ToString();
+            highscoreTxtScreen.text = Mathf.Floor(playerData.highScoreSave).ToString();
         }
 
         catch
