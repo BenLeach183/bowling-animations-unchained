@@ -98,8 +98,30 @@ public class AudioManager : MonoBehaviour
 
         //Get Audio Source at sourceIndex
         currentAudio = arr_SFX[sourceIndex].GetComponent<AudioSource>();
-        //Plays it once
+        //Plays it once, can overlap
         currentAudio.PlayOneShot(currentAudio.clip);
+    }
+
+    public void playSFX(int sourceIndex)
+    {
+        //Put all SFX Audios into an array
+        arr_SFX = GameObject.FindGameObjectsWithTag("SFX");
+
+        //Get Audio Source at sourceIndex
+        currentAudio = arr_SFX[sourceIndex].GetComponent<AudioSource>();
+        //Plays it as normal
+        currentAudio.Play();
+    }
+
+    public void stopSFX(int sourceIndex)
+    {
+        //Put all SFX Audios into an array
+        arr_SFX = GameObject.FindGameObjectsWithTag("SFX");
+
+        //Get Audio Source at sourceIndex
+        currentAudio = arr_SFX[sourceIndex].GetComponent<AudioSource>();
+        //Stops the audio
+        currentAudio.Stop();
     }
 
 }
