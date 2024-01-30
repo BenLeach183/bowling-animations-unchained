@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 CurrentMoveDirection = Vector3.forward, CurrentUpDirection = Vector3.up , RightMoveDirection = Vector3.right, InputDirection = Vector3.zero;
     public Vector3 TargetMoveDirection = Vector3.forward, TargetUpDirection = Vector3.up;
 
+    public SaveManager saveManager;
+
     public Vector3 ExtraForce = Vector3.zero;
 
     public float speed;
@@ -61,8 +63,11 @@ public class PlayerController : MonoBehaviour
        
 
         InputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        JoystickInput();
 
+        int inputType = saveManager.playerSave.controllerModes;
+        //JoystickInput();
+        //TiltInput();
+        TapInput();
 
 
     }
@@ -82,6 +87,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void TiltInput()
+    {
+        InputVector = Vector2.ClampMagnitude((Vector2)Input.acceleration, 1f);
+    }
+
+    private void TapInput()
+    {
+        if (Input.touchCount > 0)
+        {
+            InputVector = Vector2.ClampMagnitude((Vector2)Input.mousePosition - new Vector2(Screen.width/2, Screen.height/2), 1f);
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         onTrack = true;
