@@ -123,6 +123,9 @@ public class SettingsMenu : MonoBehaviour
     //SFX button Pressed
     public void sfxClick()
     {
+        //Click noise
+        audioScript.playOneSFX(0);
+
         if (Btn_muted_SFX.IsActive())
         {
             //Switch Button to unmuted
@@ -155,6 +158,9 @@ public class SettingsMenu : MonoBehaviour
     //Music button Pressed
     public void musicClick()
     {
+        //Click noise
+        audioScript.playOneSFX(0);
+
         if (Btn_muted_Music.IsActive())
         {
             //Switch Button Icon
@@ -187,6 +193,9 @@ public class SettingsMenu : MonoBehaviour
     //Post Processing Pressed
     public void postProcessingClick()
     {
+        //Click noise
+        audioScript.playOneSFX(0);
+
         //Toggles if post processing is enabled or not
         if (playerData.enablePostProcessing)
         {
@@ -206,6 +215,9 @@ public class SettingsMenu : MonoBehaviour
     public void controlsClick()
     //0 = Tap, 1 = Joystick, 2 = Tilt
     {
+        //Click noise
+        audioScript.playOneSFX(0);
+
         if (Btn_Tap.IsActive())
         {
             //Switch to Tilt
@@ -251,6 +263,9 @@ public class SettingsMenu : MonoBehaviour
     //Home Pressed
     public void homeClick()
     {
+        //Click noise
+        audioScript.playOneSFX(0);
+
         //Returns to main menu
         SceneManager.LoadSceneAsync("MainMenuAdjusted");
     }

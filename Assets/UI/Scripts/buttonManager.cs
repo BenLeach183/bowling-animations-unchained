@@ -11,6 +11,8 @@ public class buttonManager : MonoBehaviour
 {
     private GameObject button;
 
+    private AudioManager audioScript;
+
     private bool zoomToScreen = false;
     private bool playButtonPressed = false;
     private bool settingsButtonPressed = false;
@@ -36,8 +38,10 @@ public class buttonManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        
         cameraStartingTrans = Camera.main.transform;
         playFontSize = tapToPlayTxt.fontSize;
+        audioScript = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         //attempt to load data
         saveScript = GetComponent<SaveManager>();
@@ -67,6 +71,7 @@ public class buttonManager : MonoBehaviour
         screenSpaceCanvas.SetActive(false);
 
         playButtonPressed = true;
+        audioScript.playOneSFX(0);
 
         targetPosition = playScreen;
         zoomDistance = Vector3.Distance(cameraStartingTrans.position, playScreen.position);
@@ -78,7 +83,7 @@ public class buttonManager : MonoBehaviour
     public void OpenSettings()
     {
         screenSpaceCanvas.SetActive(false);
-
+        audioScript.playOneSFX(0);
         settingsButtonPressed = true;
 
         targetPosition = settingsScreen;
@@ -90,6 +95,7 @@ public class buttonManager : MonoBehaviour
 
     public void QuitGame()
     {
+        audioScript.playOneSFX(0);
         Application.Quit();
     }
 

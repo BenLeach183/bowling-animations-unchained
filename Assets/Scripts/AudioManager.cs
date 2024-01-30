@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    //Making Audio-Manager a Singleton
+    private static AudioManager _instance;
+    public static AudioManager Instance { get { return _instance; } }
+
     //Script References
     private PlayerSave playerData;
     private SaveManager saveScript;
@@ -15,9 +19,27 @@ public class AudioManager : MonoBehaviour
     //Used to cycle through and mute/unmute
     private AudioSource currentAudio;
 
-    // Start is called before the first frame update
+    //Ensure this is the only instance of the AudioManager
+    private void Awake()
+    {
+        //If another instance of AudioManager exists, and it isn't this one, destroy it
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+
+
     IEnumerator Start()
     {
+        //Make AudioManager persistent
+        DontDestroyOnLoad(this.gameObject);
+
         //Get Player Settings
         saveScript = GetComponent<SaveManager>();
 
