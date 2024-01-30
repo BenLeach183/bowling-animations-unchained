@@ -22,7 +22,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Button Btn_Home;
     [SerializeField] private TextMeshProUGUI Txt_Post_Processing;
     [SerializeField] private TextMeshProUGUI Txt_Loading;
-    [SerializeField] private TextMeshProUGUI Txt_Highscore;
     [SerializeField] private TextMeshProUGUI Txt_Controls;
     [SerializeField] private TextMeshProUGUI Txt_Music;
     [SerializeField] private TextMeshProUGUI Txt_SFX;
@@ -64,12 +63,6 @@ public class SettingsMenu : MonoBehaviour
         Txt_Controls.gameObject.SetActive(true);
         Txt_Music.gameObject.SetActive(true);
         Txt_SFX.gameObject.SetActive(true);
-
-        //Setting Highscore
-        string highscore = "Highscore! \r\n" + playerData.highScoreSave.ToString();
-        Txt_Highscore.text = highscore;
-        Txt_Highscore.gameObject.SetActive(true);
-
 
         //Check if music was muted
         if (playerData.muteMusic)
