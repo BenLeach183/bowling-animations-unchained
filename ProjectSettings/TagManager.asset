@@ -7,6 +7,8 @@ TagManager:
   - RespawnBall
   - Track
   - GameManager
+  - Music
+  - SFX
   layers:
   - Default
   - TransparentFX

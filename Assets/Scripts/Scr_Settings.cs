@@ -8,9 +8,8 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     protected SaveManager saveScript;
+    protected AudioManager audioScript;
     private PlayerSave playerData;
-
-    private bool isLoaded = false;
 
     [SerializeField] private Button Btn_muted_Music;
     [SerializeField] private Button Btn_muted_SFX;
@@ -33,6 +32,7 @@ public class SettingsMenu : MonoBehaviour
     {
         //attempt to load data
         saveScript = GetComponent<SaveManager>();
+        audioScript = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
         // wait until SaveManager has loaded saves
         yield return new WaitUntil(() => saveScript.loadedData);
@@ -41,7 +41,6 @@ public class SettingsMenu : MonoBehaviour
         {
             //Attempt to load save
             playerData = saveScript.LoadSaveData();
-            isLoaded = true;
             enableButtons(playerData);
         }
 
@@ -121,12 +120,6 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //SFX button Pressed
     public void sfxClick()
     {
@@ -138,6 +131,9 @@ public class SettingsMenu : MonoBehaviour
 
             //Update New Setting
             playerData.muteSFX = false;
+
+            //unmute SFX
+            audioScript.toggleSFX();
         }
         else if (Btn_Unmuted_SFX.IsActive())
         {
@@ -147,6 +143,9 @@ public class SettingsMenu : MonoBehaviour
 
             //Update New Setting
             playerData.muteSFX = true;
+
+            //mute sfx
+            audioScript.toggleSFX();
         }
 
         //save settings
@@ -164,6 +163,9 @@ public class SettingsMenu : MonoBehaviour
 
             //Update New Setting
             playerData.muteMusic = false;
+
+            //unmute Music
+            audioScript.toggleMusic();
         }
         else if (Btn_Unmuted_Music.IsActive())
         {
@@ -173,6 +175,9 @@ public class SettingsMenu : MonoBehaviour
 
             //Update New Setting
             playerData.muteMusic = true;
+
+            //mute Music
+            audioScript.toggleMusic();
         }
 
         //save settings
