@@ -223,6 +223,14 @@ PrefabInstance:
     - target: {fileID: 6505032943272287516, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
       propertyPath: spawnTrack
       value: 
+      objectReference: {fileID: 7176038302334939369, guid: d2c91979331b4a2468c9e20649cb0c76, type: 3}
+    - target: {fileID: 6505032943272287516, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
+      propertyPath: proceduralElements.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505032943272287516, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
+      propertyPath: proceduralElements.Array.data[7]
+      value: 
       objectReference: {fileID: 7176038302334939369, guid: 55d0ca958827042428438c35be21601d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -476,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 53518814079836957, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: MaxSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1185659512205548504, guid: 11798f209c65ace4684d7f4554b6c1ee, type: 3}
       propertyPath: m_Name
