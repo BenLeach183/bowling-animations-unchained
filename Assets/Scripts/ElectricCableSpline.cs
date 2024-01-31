@@ -6,8 +6,10 @@ using UnityEngine;
 public class ElectricCableSpline : MonoBehaviour
 {
     public Transform startPoint, endPoint;
+    //a - start b - middle c - end
     private Vector3 a, b, c;
     private LineRenderer lineRenderer;
+    //6 segments fits the art style
     int segments = 6;
     private List<Vector3> points = new List<Vector3>();
 
@@ -28,13 +30,16 @@ public class ElectricCableSpline : MonoBehaviour
 
         //Debug.Log(c);
 
+        //Droop is the part in the middle of the cable that is closer to the ground, this equation makes the b point lower if the a and c are further apart
         Vector3 droop = (a + ((c - a) / 2)) - (transform.root.up * (Vector3.Distance(a, c) * 0.1f));
         b = droop;
 
         segments = (int)Mathf.Round(Vector3.Distance(a, c));
 
+        //reusing function from beziar curve as it is very similar
         RasterizeBezier();
 
+        //loop through positions
         lineRenderer.positionCount = segments + 1;
         lineRenderer.SetPositions(points.ToArray());
         Initialised = true;
@@ -45,10 +50,9 @@ public class ElectricCableSpline : MonoBehaviour
         ReusedUpdate();
     }
 
-    public void ReusedUpdate()
+    public void ReusedUpdate()  //reused update is in here so the prefabs can use this update as the normal update was not working with procedural generation
     {
         if (!Initialised) { Initialise(); }
-        //Debug.Log("test");
         lineRenderer = GetComponent<LineRenderer>();
         a = startPoint.position;
         c =  endPoint.position;
