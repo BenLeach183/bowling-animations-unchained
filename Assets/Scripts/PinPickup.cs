@@ -10,12 +10,14 @@ public class PinPickup : MonoBehaviour
     Vector3 LocalPosReset;
     Quaternion LocalRotReset;
     private bool Initialized = false;
+    AudioManager audioManager;
 
     private bool Once = false;
     void Initialize(){
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         LocalPosReset = transform.localPosition;
         LocalRotReset = transform.localRotation;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         Initialized = true;
     }
 
@@ -31,6 +33,7 @@ public class PinPickup : MonoBehaviour
 
     void OnCollisionEnter(Collision collision){
         if(collision.transform.tag == "Player" && !Once){
+            audioManager.playOneSFX(2);
             Once = true;
             gameObject.layer = LayerMask.NameToLayer("PinUsed");
             gameManager.ScoreMultiplier += 1;

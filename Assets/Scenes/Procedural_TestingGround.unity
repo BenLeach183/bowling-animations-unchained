@@ -2282,6 +2282,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4684176658498176045, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684176658498176045, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8099759543363680859, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2324,6 +2332,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8099759543363680859, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979850967846802735, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979850967846802735, guid: cfbea037e32576148b242a0e898d8ff4, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5732,6 +5748,14 @@ PrefabInstance:
       propertyPath: maxForwardTrackLength
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6505032943272287516, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
+      propertyPath: proceduralElements.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6505032943272287516, guid: da482193ad7e5c943bf783a1aeef2282, type: 3}
+      propertyPath: proceduralElements.Array.data[7]
+      value: 
+      objectReference: {fileID: 7176038302334939369, guid: 55d0ca958827042428438c35be21601d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
